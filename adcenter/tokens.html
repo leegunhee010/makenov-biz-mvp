@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>토큰·플랜 - MAKENOV 비즈센터</title>
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css">
+    <link href="assets/css/ad-style.css" rel="stylesheet">
+    <style>
+.plans-wrap { max-width: 1080px; margin: 24px auto; }
+.plans-heading { font-size: 20px; font-weight: 800; color: #23263d; margin-bottom: 4px; }
+.plans-sub { font-size: 14px; color: #888; margin-bottom: 24px; }
+.plans-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+@media (max-width: 900px) { .plans-grid { grid-template-columns: 1fr; } }
+.plan-card {
+    background: #fff; border: 1px solid #e8e8e8; border-radius: 14px;
+    padding: 28px 24px; display: flex; flex-direction: column; align-items: center;
+    text-align: center; transition: box-shadow .15s, border-color .15s;
+}
+.plan-card:hover { border-color: #c9bfff; box-shadow: 0 6px 18px rgba(31, 175, 138, .08); }
+.plan-card--featured { border: 2px solid #22b892; position: relative; }
+.plan-name { font-size: 17px; font-weight: 800; color: #23263d; letter-spacing: .5px; }
+.plan-price { font-size: 28px; font-weight: 800; color: #1faf8a; margin: 14px 0 6px; }
+.plan-desc { font-size: 14px; color: #666; line-height: 1.6; min-height: 44px; }
+/* 플랜별 상세 안내 목록 */
+.plan-detail {
+    width: 100%; margin: 14px 0 0; padding: 0; list-style: none;
+    text-align: left; border-top: 1px solid #f0f0f4;
+}
+.plan-detail li { padding: 10px 2px; border-bottom: 1px solid #f5f5f8; }
+.plan-detail li:last-child { border-bottom: none; }
+.plan-detail .k { display: block; font-size: 12px; font-weight: 700; color: #999; margin-bottom: 3px; }
+.plan-detail .v { font-size: 13.5px; color: #444; line-height: 1.55; }
+.plan-detail li.hl .v { color: #1faf8a; font-weight: 700; }
+.plan-pay-btn {
+    width: 100%; margin-top: auto; padding: 13px; border: 0; border-radius: 8px;
+    background: linear-gradient(135deg, #22b892, #3fd0ac); color: #fff;
+    font-size: 15px; font-weight: 700; cursor: pointer;
+}
+.plan-pay-btn:hover { opacity: .9; }
+.plan-pay-btn:disabled { background: #bbb; cursor: not-allowed; opacity: 1; }
+.plans-notice {
+    margin-top: 24px; padding: 18px 20px; background: #fff;
+    border: 1px solid #e8e8e8; border-radius: 12px;
+    font-size: 12px; color: #999; line-height: 1.9;
+}
+@media (max-width: 640px) {
+    .plans-wrap { margin: 6px auto 20px; }
+    .plans-heading { font-size: 18px; }
+    .plan-card { padding: 20px 16px; }
+    .plan-price { font-size: 24px; margin: 10px 0 4px; }
+    .plans-notice { padding: 14px 16px; }
+}
+</style>
+    <style>
+    .logo-mark { background:#022e7d; }
+    .mk-note { font-size:12px; color:#8d91a9; }
+    .quick-label { white-space:nowrap; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+    <div class="logo-bar">
+        <span class="logo-mark">M</span>
+        <div>
+            <div class="logo-title">MAKENOV</div>
+            <div class="logo-sub">비즈센터</div>
+        </div>
+    </div>
+    <nav class="sidebar-nav">
+        <div class="nav-item">
+            <a href="index.html"><i class="ti ti-layout-dashboard"></i> 대시보드</a>
+        </div>
+        <div class="nav-item">
+            <a href="buyers.html"><i class="ti ti-users-group"></i> 파트너 후보</a>
+        </div>
+        <div class="nav-item">
+            <a href="meetings.html"><i class="ti ti-calendar-event"></i> 미팅 캘린더</a>
+        </div>
+        <div class="nav-item active">
+            <a href="tokens.html"><i class="ti ti-coins"></i> 토큰·플랜</a>
+        </div>
+    </nav>
+    <a class="sidebar-guide" href="guide.html">
+        <i class="ti ti-help-circle"></i> 비즈센터 이용안내
+    </a>
+</div>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <div class="main">
+        <div class="topbar">
+    <div class="topbar-left">
+        <button type="button" class="sidebar-toggle" aria-label="비즈센터">
+            <i class="ti ti-menu-2"></i>
+        </button>
+        <div class="topbar-logo">내 파트너 미팅 운영</div>
+    </div>
+    <div class="topbar-right">
+        <div class="topbar-lang">
+            <i class="ti ti-language"></i>
+            <select class="lang-select" aria-label="언어">
+                <option value="ko" selected>한국어</option>
+                <option value="vi">Tiếng Việt</option>
+                <option value="en">English</option>
+            </select>
+        </div>
+        <div class="topbar-user"><i class="ti ti-user"></i> <span>demo@makenov.com</span></div>
+        <a href="login.html" class="logout-btn">로그아웃</a>
+    </div>
+</div>
+        <div class="content">
+<div class="plans-wrap">
+    <div class="plans-heading">플랜</div>
+    <div class="plans-sub">모든 플랜의 내용은 같고, 기간이 길수록 월 금액이 낮아집니다. 1년 플랜은 KFESTA에 초청합니다. 지금 이용 중인 플랜은 6개월 플랜이며 남은 토큰은 350개입니다.</div>
+    <div class="plans-grid">
+        <div class="plan-card">
+            <div class="plan-name">3개월</div>
+            <div class="plan-price">7,000,000원</div>
+            <div class="plan-desc">월 약 233만 원</div>
+            <ul class="plan-detail"><li><span class="k">기간</span><span class="v">3개월</span></li><li class="hl"><span class="k">온라인 미팅</span><span class="v">1회 250토큰, 월 지급 토큰 안에서</span></li><li><span class="k">월 파트너 후보</span><span class="v">10곳</span></li><li><span class="k">자체 콘텐츠</span><span class="v">월 2건</span></li><li class="hl"><span class="k">월 지급 토큰</span><span class="v">250토큰</span></li><li><span class="k">영업자료 현지화</span><span class="v">포함</span></li><li><span class="k">베트남 수출상담회</span><span class="v">없음</span></li></ul>
+            <button type="button" class="plan-pay-btn" onclick="mkDemo()"><i class="ti ti-credit-card"></i> 상담 신청</button>
+        </div>
+        <div class="plan-card plan-card--featured">
+            <div class="plan-name">6개월</div>
+            <div class="plan-price">12,000,000원</div>
+            <div class="plan-desc">월 약 200만 원</div>
+            <ul class="plan-detail"><li><span class="k">기간</span><span class="v">6개월</span></li><li class="hl"><span class="k">온라인 미팅</span><span class="v">1회 250토큰, 월 지급 토큰 안에서</span></li><li><span class="k">월 파트너 후보</span><span class="v">10곳</span></li><li><span class="k">자체 콘텐츠</span><span class="v">월 2건</span></li><li class="hl"><span class="k">월 지급 토큰</span><span class="v">300토큰</span></li><li><span class="k">영업자료 현지화</span><span class="v">포함</span></li><li><span class="k">베트남 수출상담회</span><span class="v">없음</span></li></ul>
+            <button type="button" class="plan-pay-btn" onclick="mkDemo()"><i class="ti ti-credit-card"></i> 상담 신청</button>
+        </div>
+        <div class="plan-card">
+            <div class="plan-name">1년</div>
+            <div class="plan-price">20,000,000원</div>
+            <div class="plan-desc">월 약 167만 원 · KFESTA 초청</div>
+            <ul class="plan-detail"><li><span class="k">기간</span><span class="v">12개월</span></li><li class="hl"><span class="k">온라인 미팅</span><span class="v">1회 250토큰, 월 지급 토큰 안에서</span></li><li><span class="k">월 파트너 후보</span><span class="v">10곳</span></li><li><span class="k">자체 콘텐츠</span><span class="v">월 2건</span></li><li class="hl"><span class="k">월 지급 토큰</span><span class="v">350토큰</span></li><li><span class="k">영업자료 현지화</span><span class="v">포함</span></li><li><span class="k">베트남 수출상담회</span><span class="v">KFESTA 1회 초청. 온라인으로 만난 파트너를 현지에서 직접 만남 (참가비 175만 원 무료)</span></li></ul>
+            <button type="button" class="plan-pay-btn" onclick="mkDemo()"><i class="ti ti-credit-card"></i> 상담 신청</button>
+        </div>
+    </div>
+    <div class="plans-heading" style="margin-top:36px;">토큰 충전</div>
+    <div class="plans-sub">1만 원은 10토큰입니다. 토큰은 미팅에만 씁니다. 파트너 정보와 연락처는 무료입니다.</div>
+    <div class="plans-grid">
+        <div class="plan-card">
+            <div class="plan-name">토큰 250개</div>
+            <div class="plan-price">250,000원</div>
+            <div class="plan-desc">추가 미팅 1회</div>
+            <ul class="plan-detail"><li><span class="k">쓰는 곳</span><span class="v">온라인 미팅 1회</span></li><li class="hl"><span class="k">토큰</span><span class="v">250토큰</span></li></ul>
+            <button type="button" class="plan-pay-btn" onclick="mkDemo()"><i class="ti ti-credit-card"></i> 충전하기</button>
+        </div>
+        <div class="plan-card">
+            <div class="plan-name">토큰 500개</div>
+            <div class="plan-price">500,000원</div>
+            <div class="plan-desc">온라인 미팅 2회</div>
+            <ul class="plan-detail"><li><span class="k">쓰는 곳</span><span class="v">온라인 미팅, 후속 미팅</span></li><li class="hl"><span class="k">토큰</span><span class="v">500토큰</span></li></ul>
+            <button type="button" class="plan-pay-btn" onclick="mkDemo()"><i class="ti ti-credit-card"></i> 충전하기</button>
+        </div>
+        <div class="plan-card">
+            <div class="plan-name">토큰 1,000개</div>
+            <div class="plan-price">1,000,000원</div>
+            <div class="plan-desc">온라인 미팅 4회</div>
+            <ul class="plan-detail"><li><span class="k">쓰는 곳</span><span class="v">온라인 미팅, 후속 미팅</span></li><li class="hl"><span class="k">토큰</span><span class="v">1,000토큰</span></li></ul>
+            <button type="button" class="plan-pay-btn" onclick="mkDemo()"><i class="ti ti-credit-card"></i> 충전하기</button>
+        </div>
+    </div>
+    <div class="plans-notice">
+        1. 계약 기간은 등록, 상세페이지, 현지화 세팅이 끝난 날부터 시작합니다.<br>
+        2. 남은 토큰은 계약 기간 안에서 다음 달로 넘어가며, 계약이 끝나면 없어집니다.<br>
+        3. 파트너 정보와 연락처는 무료입니다.<br>
+        4. 온라인 미팅은 1회에 250토큰이며 통역, 회의록, 사전·사후 지원을 포함합니다. 월 지급 토큰(3개월 250, 6개월 300, 1년 350) 안에서 진행하고, 부족하면 추가로 충전합니다.<br>
+        * 부가세(VAT) 별도 금액입니다.
+    </div>
+</div>
+        </div>
+        <footer class="app-footer">
+    MAKENOV 비즈센터 / 이메일 : notice@makenov.com<br>
+    이 화면은 시안이며 표시된 파트너와 수치는 샘플 데이터입니다.
+</footer>
+    </div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/sweetalert2.all.min.js"></script>
+    <script>
+  const Toast = Swal.mixin({
+    toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, timerProgressBar: true,
+    onOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  });
+  function mkDemo(msg) { Toast.fire({ icon: 'info', title: msg || '시안 화면입니다. 실제 처리는 되지 않습니다.' }); }
+    (function () {
+        document.addEventListener('click', function (e) {
+            var t = e.target;
+            if (t.closest && t.closest('.sidebar-toggle')) { document.body.classList.toggle('sidebar-open'); return; }
+            if ((t.closest && t.closest('#sidebar-overlay'))
+                || (t.closest && t.closest('.sidebar-nav a[href]:not([href="#"])'))
+                || (t.closest && t.closest('.sidebar-guide'))) {
+                document.body.classList.remove('sidebar-open');
+            }
+        });
+    })();
+    </script>
+
+</body>
+</html>

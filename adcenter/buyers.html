@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>파트너 후보 - MAKENOV 비즈센터</title>
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css">
+    <link href="assets/css/ad-style.css" rel="stylesheet">
+    <style>
+    .campaign-list-page .section-title {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 18px;
+    }
+    .campaign-list-page .section-title .ti { font-size: 24px; }
+    .campaign-list-page .data-card { padding: 22px 24px; }
+
+    .campaign-list-page .adv-table { font-size: 16px; }
+    .campaign-list-page .adv-table th {
+        font-size: 14px;
+        font-weight: 600;
+        padding: 10px 12px;
+    }
+    .campaign-list-page .adv-table td { padding: 14px 12px; }
+
+    .campaign-list-page .adv-table .campaign-name {
+        font-size: 17px;
+        font-weight: 600;
+    }
+    .campaign-list-page .adv-table .campaign-brand {
+        font-size: 14px;
+        margin-top: 3px;
+    }
+
+    .campaign-list-page .media-pill {
+        font-size: 13px;
+        padding: 3px 10px;
+        font-weight: 600;
+    }
+    .campaign-list-page .status-badge {
+        font-size: 13px;
+        padding: 3px 10px;
+        font-weight: 600;
+    }
+
+    .campaign-list-page .progress-bar-wrap {
+        height: 6px;
+        min-width: 72px;
+    }
+    .campaign-list-page .progress-bar-fill { height: 6px; }
+
+    /* 선정/모집 통합 진행바 — 정원 충족 시 초록색 */
+    .campaign-list-page .sel-progress { min-width: 96px; }
+    .campaign-list-page .sel-progress .nums { font-size: 14px; color: #888; margin-bottom: 4px; white-space: nowrap; }
+    .campaign-list-page .sel-progress .nums b { font-size: 16px; color: #333; }
+    .campaign-list-page .sel-progress .progress-bar-fill { background: #1a9c7b; }
+    .campaign-list-page .sel-progress .progress-bar-fill.full { background: #27ae60; }
+
+    .campaign-list-page .empty-state {
+        font-size: 15px;
+        height: 96px;
+    }
+
+    /* ── 모바일 카드 목록 (768px 이하에서 테이블 대체) ── */
+    .campaign-cards { display: none; }
+    @media (max-width: 768px) {
+        .campaign-list-page .adv-table { display: none; }
+        .campaign-list-page .data-card { padding: 16px 14px; }
+        .campaign-list-page .section-title { font-size: 20px; margin-bottom: 14px; }
+
+        .campaign-cards { display: flex; flex-direction: column; gap: 10px; }
+        .ccard {
+            display: block; border: 1px solid #eceef4; border-radius: 12px;
+            padding: 14px; text-decoration: none; color: inherit;
+            background: #fff;
+        }
+        .ccard:active { background: #fafafd; }
+        .ccard-top { display: flex; align-items: flex-start; gap: 10px; }
+        .ccard-top .campaign-thumb { width: 46px; height: 46px; flex-shrink: 0; }
+        .ccard-title-wrap { flex: 1; min-width: 0; }
+        .ccard-title {
+            font-size: 15px; font-weight: 700; color: #222; line-height: 1.35;
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+        }
+        .ccard-brand { font-size: 12px; color: #999; margin-top: 2px; }
+        .ccard-top .status-badge { flex-shrink: 0; }
+        .ccard-pills {
+            display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+            margin-top: 10px; font-size: 12px; color: #888;
+        }
+        .ccard-stats {
+            display: flex; align-items: center; gap: 8px;
+            margin-top: 10px; padding-top: 10px; border-top: 1px solid #f3f4f8;
+        }
+        .ccard-stat { flex: 1; text-align: center; }
+        .ccard-stat .n { font-size: 15px; font-weight: 700; color: #333; }
+        .ccard-stat .n small { font-size: 12px; font-weight: 500; color: #999; }
+        .ccard-stat .l { font-size: 11px; color: #999; margin-top: 1px; }
+        .ccard-stats .progress-bar-wrap { margin-top: 4px; }
+        .ccard-stats .progress-bar-fill { background: #1a9c7b; }
+        .ccard-stats .progress-bar-fill.full { background: #27ae60; }
+    }
+</style>
+    <style>
+    .logo-mark { background:#022e7d; }
+    .mk-note { font-size:12px; color:#8d91a9; }
+    .quick-label { white-space:nowrap; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+    <div class="logo-bar">
+        <span class="logo-mark">M</span>
+        <div>
+            <div class="logo-title">MAKENOV</div>
+            <div class="logo-sub">비즈센터</div>
+        </div>
+    </div>
+    <nav class="sidebar-nav">
+        <div class="nav-item">
+            <a href="index.html"><i class="ti ti-layout-dashboard"></i> 대시보드</a>
+        </div>
+        <div class="nav-item active">
+            <a href="buyers.html"><i class="ti ti-users-group"></i> 파트너 후보</a>
+        </div>
+        <div class="nav-item">
+            <a href="meetings.html"><i class="ti ti-calendar-event"></i> 미팅 캘린더</a>
+        </div>
+        <div class="nav-item">
+            <a href="tokens.html"><i class="ti ti-coins"></i> 토큰·플랜</a>
+        </div>
+    </nav>
+    <a class="sidebar-guide" href="guide.html">
+        <i class="ti ti-help-circle"></i> 비즈센터 이용안내
+    </a>
+</div>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <div class="main">
+        <div class="topbar">
+    <div class="topbar-left">
+        <button type="button" class="sidebar-toggle" aria-label="비즈센터">
+            <i class="ti ti-menu-2"></i>
+        </button>
+        <div class="topbar-logo">내 파트너 미팅 운영</div>
+    </div>
+    <div class="topbar-right">
+        <div class="topbar-lang">
+            <i class="ti ti-language"></i>
+            <select class="lang-select" aria-label="언어">
+                <option value="ko" selected>한국어</option>
+                <option value="vi">Tiếng Việt</option>
+                <option value="en">English</option>
+            </select>
+        </div>
+        <div class="topbar-user"><i class="ti ti-user"></i> <span>demo@makenov.com</span></div>
+        <a href="login.html" class="logout-btn">로그아웃</a>
+    </div>
+</div>
+        <div class="content">
+<div class="campaign-list-page">
+    <div class="mk-banner">
+        <i class="ti ti-info-circle"></i>
+        <div>
+            <b>2026년 10월 파트너 후보 10곳</b>
+            <span>파트너 정보와 연락처는 무료로 볼 수 있습니다. 이 중 한 곳을 골라 이번 달 온라인 미팅을 신청하세요. 고르지 못하면 3곳을 더 제안합니다.</span>
+        </div>
+        <span class="mk-banner-left">남은 토큰 <b>350</b> · 미팅 1회 250토큰</span>
+    </div>
+    <div class="data-card">
+        <div class="section-title"><i class="ti ti-users-group"></i> 파트너 후보 목록</div>
+        <table class="adv-table">
+            <thead>
+                <tr>
+                    <th>#</th><th>파트너</th><th>업종</th><th>지역</th><th>관심 품목</th>
+                    <th>제안일</th><th>연락처</th><th>상태</th><th>상세</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="mk-no">1</td>
+                <td>
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <div>
+                            <div class="campaign-name">호치민 화장품 유통사 A</div>
+                            <div class="campaign-brand">Beauty Distribution A</div>
+                        </div>
+                    </div>
+                </td>
+                <td><span class="media-pill mk-pill">드럭스토어</span></td>
+                <td class="mk-cell">호치민</td>
+                <td class="mk-cell mk-muted mk-items">스킨케어, 헤어케어</td>
+                <td class="mk-cell mk-muted">2026.10.01</td>
+                <td><a class="mk-lockchip" href="buyer.html"><i class="ti ti-address-book"></i> 보기</a></td>
+                <td><span class="status-badge status-badge--active">미팅 확정</span></td>
+                <td><a class="mk-detail" href="buyer.html">상세 보기</a></td>
+            </tr>
+            <tr>
+                <td class="mk-no">2</td>
+                <td>
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <div>
+                            <div class="campaign-name">하노이 마트 체인 B</div>
+                            <div class="campaign-brand">Mart Chain B</div>
+                        </div>
+                    </div>
+                </td>
+                <td><span class="media-pill mk-pill">마트</span></td>
+                <td class="mk-cell">하노이</td>
+                <td class="mk-cell mk-muted mk-items">생활용품, 식품</td>
+                <td class="mk-cell mk-muted">2026.10.01</td>
+                <td><a class="mk-lockchip" href="buyer.html"><i class="ti ti-address-book"></i> 보기</a></td>
+                <td><span class="status-badge status-badge--upcoming">열람함</span></td>
+                <td><a class="mk-detail" href="buyer.html">상세 보기</a></td>
+            </tr>
+            <tr>
+                <td class="mk-no">3</td>
+                <td>
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <div>
+                            <div class="campaign-name">다낭 온라인 셀러 C</div>
+                            <div class="campaign-brand">Online Seller C</div>
+                        </div>
+                    </div>
+                </td>
+                <td><span class="media-pill mk-pill">온라인몰</span></td>
+                <td class="mk-cell">다낭</td>
+                <td class="mk-cell mk-muted mk-items">뷰티, 소형 가전</td>
+                <td class="mk-cell mk-muted">2026.10.01</td>
+                <td><a class="mk-lockchip" href="buyer.html"><i class="ti ti-address-book"></i> 보기</a></td>
+                <td><span class="status-badge status-badge--upcoming">열람함</span></td>
+                <td><a class="mk-detail" href="buyer.html">상세 보기</a></td>
+            </tr>
+            <tr>
+                <td class="mk-no">4</td>
+                <td>
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <div>
+                            <div class="campaign-name">호치민 수입 총판 D</div>
+                            <div class="campaign-brand">Import Distributor D</div>
+                        </div>
+                    </div>
+                </td>
+                <td><span class="media-pill mk-pill">총판</span></td>
+                <td class="mk-cell">호치민</td>
+                <td class="mk-cell mk-muted mk-items">건강기능식품</td>
+                <td class="mk-cell mk-muted">2026.10.01</td>
+                <td><a class="mk-lockchip" href="buyer.html"><i class="ti ti-address-book"></i> 보기</a></td>
+                <td><span class="status-badge status-badge--ended">새 후보</span></td>
+                <td><a class="mk-detail" href="buyer.html">상세 보기</a></td>
+            </tr>
+            <tr>
+                <td class="mk-no">5</td>
+                <td>
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <div>
+                            <div class="campaign-name">껀터 약국 체인 E</div>
+                            <div class="campaign-brand">Pharmacy Chain E</div>
+                        </div>
+                    </div>
+                </td>
+                <td><span class="media-pill mk-pill">약국</span></td>
+                <td class="mk-cell">껀터</td>
+                <td class="mk-cell mk-muted mk-items">건강, 스킨케어</td>
+                <td class="mk-cell mk-muted">2026.10.01</td>
+                <td><a class="mk-lockchip" href="buyer.html"><i class="ti ti-address-book"></i> 보기</a></td>
+                <td><span class="status-badge status-badge--ended">새 후보</span></td>
+                <td><a class="mk-detail" href="buyer.html">상세 보기</a></td>
+            </tr>
+            <tr>
+                <td class="mk-no">6</td>
+                <td>
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <div>
+                            <div class="campaign-name">하노이 백화점 F</div>
+                            <div class="campaign-brand">Department Store F</div>
+                        </div>
+                    </div>
+                </td>
+                <td><span class="media-pill mk-pill">백화점</span></td>
+                <td class="mk-cell">하노이</td>
+                <td class="mk-cell mk-muted mk-items">프리미엄 뷰티</td>
+                <td class="mk-cell mk-muted">2026.10.01</td>
+                <td><a class="mk-lockchip" href="buyer.html"><i class="ti ti-address-book"></i> 보기</a></td>
+                <td><span class="status-badge status-badge--upcoming">열람함</span></td>
+                <td><a class="mk-detail" href="buyer.html">상세 보기</a></td>
+            </tr>
+            <tr>
+                <td class="mk-no">7</td>
+                <td>
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <div>
+                            <div class="campaign-name">호치민 홈쇼핑 MD G</div>
+                            <div class="campaign-brand">Home Shopping G</div>
+                        </div>
+                    </div>
+                </td>
+                <td><span class="media-pill mk-pill">홈쇼핑</span></td>
+                <td class="mk-cell">호치민</td>
+                <td class="mk-cell mk-muted mk-items">주방, 생활가전</td>
+                <td class="mk-cell mk-muted">2026.10.01</td>
+                <td><a class="mk-lockchip" href="buyer.html"><i class="ti ti-address-book"></i> 보기</a></td>
+                <td><span class="status-badge status-badge--ended">새 후보</span></td>
+                <td><a class="mk-detail" href="buyer.html">상세 보기</a></td>
+            </tr>
+            <tr>
+                <td class="mk-no">8</td>
+                <td>
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <div>
+                            <div class="campaign-name">하이퐁 도매상 H</div>
+                            <div class="campaign-brand">Wholesaler H</div>
+                        </div>
+                    </div>
+                </td>
+                <td><span class="media-pill mk-pill">도매</span></td>
+                <td class="mk-cell">하이퐁</td>
+                <td class="mk-cell mk-muted mk-items">생활용품</td>
+                <td class="mk-cell mk-muted">2026.10.01</td>
+                <td><a class="mk-lockchip" href="buyer.html"><i class="ti ti-address-book"></i> 보기</a></td>
+                <td><span class="status-badge status-badge--ended">새 후보</span></td>
+                <td><a class="mk-detail" href="buyer.html">상세 보기</a></td>
+            </tr>
+            <tr>
+                <td class="mk-no">9</td>
+                <td>
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <div>
+                            <div class="campaign-name">호치민 편의점 체인 I</div>
+                            <div class="campaign-brand">Convenience Chain I</div>
+                        </div>
+                    </div>
+                </td>
+                <td><span class="media-pill mk-pill">편의점</span></td>
+                <td class="mk-cell">호치민</td>
+                <td class="mk-cell mk-muted mk-items">식품, 음료</td>
+                <td class="mk-cell mk-muted">2026.10.01</td>
+                <td><a class="mk-lockchip" href="buyer.html"><i class="ti ti-address-book"></i> 보기</a></td>
+                <td><span class="status-badge status-badge--ended">새 후보</span></td>
+                <td><a class="mk-detail" href="buyer.html">상세 보기</a></td>
+            </tr>
+            <tr>
+                <td class="mk-no">10</td>
+                <td>
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <div>
+                            <div class="campaign-name">다낭 리조트 구매팀 J</div>
+                            <div class="campaign-brand">Resort Purchasing J</div>
+                        </div>
+                    </div>
+                </td>
+                <td><span class="media-pill mk-pill">호텔·리조트</span></td>
+                <td class="mk-cell">다낭</td>
+                <td class="mk-cell mk-muted mk-items">어메니티, 침구</td>
+                <td class="mk-cell mk-muted">2026.10.01</td>
+                <td><a class="mk-lockchip" href="buyer.html"><i class="ti ti-address-book"></i> 보기</a></td>
+                <td><span class="status-badge status-badge--ended">새 후보</span></td>
+                <td><a class="mk-detail" href="buyer.html">상세 보기</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="campaign-cards">
+            <a class="ccard" href="buyer.html">
+                <div class="ccard-top">
+                    <div class="ccard-title-wrap">
+                        <div class="ccard-title">호치민 화장품 유통사 A</div>
+                        <div class="ccard-brand">Beauty Distribution A</div>
+                    </div>
+                    <span class="status-badge status-badge--active">미팅 확정</span>
+                </div>
+                <div class="ccard-pills">
+                    <span class="media-pill mk-pill">드럭스토어</span>
+                    <span>호치민 · 스킨케어, 헤어케어</span>
+                </div>
+            </a>
+            <a class="ccard" href="buyer.html">
+                <div class="ccard-top">
+                    <div class="ccard-title-wrap">
+                        <div class="ccard-title">하노이 마트 체인 B</div>
+                        <div class="ccard-brand">Mart Chain B</div>
+                    </div>
+                    <span class="status-badge status-badge--upcoming">열람함</span>
+                </div>
+                <div class="ccard-pills">
+                    <span class="media-pill mk-pill">마트</span>
+                    <span>하노이 · 생활용품, 식품</span>
+                </div>
+            </a>
+            <a class="ccard" href="buyer.html">
+                <div class="ccard-top">
+                    <div class="ccard-title-wrap">
+                        <div class="ccard-title">다낭 온라인 셀러 C</div>
+                        <div class="ccard-brand">Online Seller C</div>
+                    </div>
+                    <span class="status-badge status-badge--upcoming">열람함</span>
+                </div>
+                <div class="ccard-pills">
+                    <span class="media-pill mk-pill">온라인몰</span>
+                    <span>다낭 · 뷰티, 소형 가전</span>
+                </div>
+            </a>
+            <a class="ccard" href="buyer.html">
+                <div class="ccard-top">
+                    <div class="ccard-title-wrap">
+                        <div class="ccard-title">호치민 수입 총판 D</div>
+                        <div class="ccard-brand">Import Distributor D</div>
+                    </div>
+                    <span class="status-badge status-badge--ended">새 후보</span>
+                </div>
+                <div class="ccard-pills">
+                    <span class="media-pill mk-pill">총판</span>
+                    <span>호치민 · 건강기능식품</span>
+                </div>
+            </a>
+            <a class="ccard" href="buyer.html">
+                <div class="ccard-top">
+                    <div class="ccard-title-wrap">
+                        <div class="ccard-title">껀터 약국 체인 E</div>
+                        <div class="ccard-brand">Pharmacy Chain E</div>
+                    </div>
+                    <span class="status-badge status-badge--ended">새 후보</span>
+                </div>
+                <div class="ccard-pills">
+                    <span class="media-pill mk-pill">약국</span>
+                    <span>껀터 · 건강, 스킨케어</span>
+                </div>
+            </a>
+            <a class="ccard" href="buyer.html">
+                <div class="ccard-top">
+                    <div class="ccard-title-wrap">
+                        <div class="ccard-title">하노이 백화점 F</div>
+                        <div class="ccard-brand">Department Store F</div>
+                    </div>
+                    <span class="status-badge status-badge--upcoming">열람함</span>
+                </div>
+                <div class="ccard-pills">
+                    <span class="media-pill mk-pill">백화점</span>
+                    <span>하노이 · 프리미엄 뷰티</span>
+                </div>
+            </a>
+            <a class="ccard" href="buyer.html">
+                <div class="ccard-top">
+                    <div class="ccard-title-wrap">
+                        <div class="ccard-title">호치민 홈쇼핑 MD G</div>
+                        <div class="ccard-brand">Home Shopping G</div>
+                    </div>
+                    <span class="status-badge status-badge--ended">새 후보</span>
+                </div>
+                <div class="ccard-pills">
+                    <span class="media-pill mk-pill">홈쇼핑</span>
+                    <span>호치민 · 주방, 생활가전</span>
+                </div>
+            </a>
+            <a class="ccard" href="buyer.html">
+                <div class="ccard-top">
+                    <div class="ccard-title-wrap">
+                        <div class="ccard-title">하이퐁 도매상 H</div>
+                        <div class="ccard-brand">Wholesaler H</div>
+                    </div>
+                    <span class="status-badge status-badge--ended">새 후보</span>
+                </div>
+                <div class="ccard-pills">
+                    <span class="media-pill mk-pill">도매</span>
+                    <span>하이퐁 · 생활용품</span>
+                </div>
+            </a>
+            <a class="ccard" href="buyer.html">
+                <div class="ccard-top">
+                    <div class="ccard-title-wrap">
+                        <div class="ccard-title">호치민 편의점 체인 I</div>
+                        <div class="ccard-brand">Convenience Chain I</div>
+                    </div>
+                    <span class="status-badge status-badge--ended">새 후보</span>
+                </div>
+                <div class="ccard-pills">
+                    <span class="media-pill mk-pill">편의점</span>
+                    <span>호치민 · 식품, 음료</span>
+                </div>
+            </a>
+            <a class="ccard" href="buyer.html">
+                <div class="ccard-top">
+                    <div class="ccard-title-wrap">
+                        <div class="ccard-title">다낭 리조트 구매팀 J</div>
+                        <div class="ccard-brand">Resort Purchasing J</div>
+                    </div>
+                    <span class="status-badge status-badge--ended">새 후보</span>
+                </div>
+                <div class="ccard-pills">
+                    <span class="media-pill mk-pill">호텔·리조트</span>
+                    <span>다낭 · 어메니티, 침구</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+        </div>
+        <footer class="app-footer">
+    MAKENOV 비즈센터 / 이메일 : notice@makenov.com<br>
+    이 화면은 시안이며 표시된 파트너와 수치는 샘플 데이터입니다.
+</footer>
+    </div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/sweetalert2.all.min.js"></script>
+    <script>
+  const Toast = Swal.mixin({
+    toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, timerProgressBar: true,
+    onOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  });
+  function mkDemo(msg) { Toast.fire({ icon: 'info', title: msg || '시안 화면입니다. 실제 처리는 되지 않습니다.' }); }
+    (function () {
+        document.addEventListener('click', function (e) {
+            var t = e.target;
+            if (t.closest && t.closest('.sidebar-toggle')) { document.body.classList.toggle('sidebar-open'); return; }
+            if ((t.closest && t.closest('#sidebar-overlay'))
+                || (t.closest && t.closest('.sidebar-nav a[href]:not([href="#"])'))
+                || (t.closest && t.closest('.sidebar-guide'))) {
+                document.body.classList.remove('sidebar-open');
+            }
+        });
+    })();
+    </script>
+
+<style>
+.mk-banner{display:flex;align-items:center;gap:12px;background:#e9faf5;border:1px solid #bfeedf;border-radius:12px;padding:14px 18px;margin-bottom:16px;font-size:13px;color:#4b4f66;line-height:1.6}
+.mk-banner>.ti{font-size:22px;color:#1faf8a;flex:none}
+.mk-banner b{display:block;color:#22263a;font-size:14px;margin-bottom:2px}
+.mk-banner-left{flex:none;margin-left:auto;background:#fff;border:1px solid #bfeedf;border-radius:999px;padding:6px 14px;font-size:12px;color:#4b4f66;white-space:nowrap}
+.mk-banner-left b{display:inline;color:#1faf8a;font-size:13px}
+.campaign-list-page .adv-table td.mk-no{color:#bbb;font-size:12px}
+.campaign-list-page .adv-table td.mk-cell{font-size:14px;color:#333;white-space:nowrap}
+.campaign-list-page .adv-table td.mk-items{white-space:normal;min-width:120px;max-width:180px}
+.campaign-list-page .campaign-name{white-space:nowrap}
+.campaign-list-page .status-badge,.campaign-list-page .media-pill{white-space:nowrap}
+.campaign-list-page .adv-table th{white-space:nowrap}
+.campaign-list-page .adv-table td.mk-muted{font-size:13px;color:#70738a}
+.mk-pill{background:#e9faf5;color:#1a9c7b}
+.mk-lockchip{text-decoration:none;display:inline-flex;align-items:center;gap:4px;height:28px;padding:0 10px;border:1px solid #dfe3f2;border-radius:6px;background:#fff;color:#4b4f66;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap}
+.mk-lockchip .ti{font-size:14px;color:#8d91a9}
+.mk-lockchip:hover{border-color:#1faf8a;color:#1a9c7b}
+.mk-open{font-size:12px;color:#1a9c7b;font-weight:600}
+.mk-detail{color:#1faf8a;font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap}
+@media (max-width:768px){.mk-banner{flex-wrap:wrap}.mk-banner-left{margin-left:0}}
+</style>
+</body>
+</html>

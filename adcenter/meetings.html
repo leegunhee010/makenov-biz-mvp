@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>미팅 캘린더 - MAKENOV 비즈센터</title>
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css">
+    <link href="assets/css/ad-style.css" rel="stylesheet">
+    <style>
+.ad-booking { color: #2b2b2b; }
+.ad-booking .adc-heading { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+.ad-booking .adc-heading h2 { margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -0.2px; }
+.ad-booking .adc-heading .sub { color: #8d91a9; font-size: 13px; font-weight: 500; }
+
+/* KPI 카드 */
+#bk-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 14px; }
+#bk-kpis .k-card {
+    background: #fff; border: 1px solid #eceef4; border-left-width: 4px; border-radius: 10px;
+    padding: 14px 16px;
+}
+#bk-kpis .k-card .k-label { display: block; font-size: 12px; color: #8d91a9; font-weight: 700; }
+#bk-kpis .k-card .k-value { display: block; font-size: 24px; font-weight: 800; color: #22263a; margin-top: 2px; }
+#bk-kpis .k-card.total     { border-left-color: #1faf8a; }
+#bk-kpis .k-card.confirmed { border-left-color: #0ea5a0; }
+#bk-kpis .k-card.pending   { border-left-color: #d97706; }
+#bk-kpis .k-card.done      { border-left-color: #178a4e; }
+
+/* 레이아웃: 캘린더 + 확정 대기 큐 */
+.bk-grid { display: grid; grid-template-columns: 1fr 300px; gap: 14px; align-items: start; }
+.bk-card { background: #fff; border: 1px solid #eceef4; border-radius: 12px; }
+.bk-card .bk-card-head { padding: 12px 16px; border-bottom: 1px solid #eceef4; }
+.bk-card .bk-card-body { padding: 14px 16px; }
+
+/* 툴바 */
+#bk-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+#bk-toolbar .bk-month { font-weight: 800; font-size: 16px; margin: 0 4px; min-width: 100px; text-align: center; }
+#bk-toolbar .bk-btn {
+    border: 1px solid #e3e5ef; background: #fff; border-radius: 8px; color: #4b4f66;
+    font-size: 13px; font-weight: 700; padding: 6px 12px; cursor: pointer;
+}
+#bk-toolbar .bk-btn:hover { background: #f6f6fb; }
+#bk-toolbar select {
+    border: 1px solid #e3e5ef; border-radius: 8px; padding: 6px 10px; font-size: 13px;
+    color: #4b4f66; background: #fff; max-width: 260px;
+}
+#bk-toolbar .sp { flex: 1; }
+
+/* 상태 필터 칩 */
+#bk-filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+#bk-filters .fchip {
+    display: inline-flex; align-items: center; gap: 5px;
+    border: 1px solid #e3e5ef; background: #fff; border-radius: 20px;
+    padding: 3px 12px; font-size: 12px; font-weight: 700; color: #4b4f66; cursor: pointer; user-select: none;
+}
+#bk-filters .fchip .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+#bk-filters .fchip.off { opacity: .35; }
+
+/* 캘린더 */
+table.bk-cal { border-collapse: collapse; width: 100%; table-layout: fixed; }
+table.bk-cal th {
+    background: #f7f8fc; border: 1px solid #eceef4; font-size: 12px; color: #70738a;
+    padding: 6px 0; text-align: center; font-weight: 700;
+}
+table.bk-cal th.sun { color: #e0447c; }
+table.bk-cal th.sat { color: #3b6fe0; }
+table.bk-cal td { border: 1px solid #eceef4; min-height: 96px; height: 96px; vertical-align: top; padding: 4px 5px; }
+table.bk-cal td.out { background: #fafbfd; }
+table.bk-cal td .dn { font-size: 12px; color: #70738a; font-weight: 700; }
+table.bk-cal td.out .dn { color: #c4c8d6; }
+table.bk-cal td .dn.sun { color: #e0447c; }
+table.bk-cal td.today { background: #f5f2ff; }
+table.bk-cal td.today .dn {
+    background: #1faf8a; color: #fff; border-radius: 50%;
+    width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center;
+}
+.bk-ev {
+    display: block; width: 100%; text-align: left; border: 0; border-radius: 5px;
+    padding: 1px 6px; margin-top: 3px; font-size: 11.5px; color: #fff; cursor: pointer;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 700;
+}
+.bk-ev:focus { outline: none; }
+.bk-s-pending   { background: #d97706; }
+.bk-s-confirmed { background: #0ea5a0; }
+.bk-s-done      { background: #178a4e; }
+.bk-more { font-size: 11px; color: #8d91a9; cursor: pointer; margin-top: 2px; display: inline-block; }
+
+/* 범례 */
+#bk-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 12px; font-size: 12px; color: #70738a; }
+#bk-legend span { display: inline-flex; align-items: center; gap: 6px; }
+#bk-legend i { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+
+/* 확정 대기 큐 */
+#bk-queue-card .bk-card-head { display: flex; align-items: center; gap: 6px; font-weight: 800; font-size: 14px; }
+#bk-queue-card .bk-card-head .ti { color: #d97706; }
+#bk-queue-card .q-count {
+    background: #fdeadd; color: #b45309; border-radius: 999px;
+    font-size: 12px; font-weight: 800; padding: 1px 9px;
+}
+#bk-queue .q-item {
+    border: 1px solid #eceef4; border-left: 4px solid #d97706; border-radius: 8px;
+    padding: 9px 12px; margin-bottom: 8px; cursor: pointer;
+}
+#bk-queue .q-item:hover { background: #fafbfd; }
+#bk-queue .q-item .q-t { font-weight: 800; font-size: 13px; color: #22263a; }
+#bk-queue .q-item .q-m { color: #8d91a9; font-size: 12px; margin-top: 2px; }
+#bk-queue .q-empty { color: #8d91a9; font-size: 13px; }
+#bk-queue-card .bk-note { padding: 10px 16px; border-top: 1px solid #eceef4; color: #8d91a9; font-size: 11.5px; }
+
+/* 드로어 */
+#bk-scrim { position: fixed; inset: 0; background: rgba(24, 22, 48, .35); display: none; z-index: 1040; }
+#bk-scrim.open { display: block; }
+#bk-drawer {
+    position: fixed; top: 0; right: 0; height: 100vh; width: 420px; max-width: 92vw;
+    background: #fff; box-shadow: -6px 0 24px rgba(24, 22, 48, .14);
+    transform: translateX(100%); transition: transform .22s; z-index: 1050;
+    display: flex; flex-direction: column;
+}
+#bk-drawer.open { transform: none; }
+#bk-drawer .d-hd { padding: 16px 18px; border-bottom: 1px solid #eceef4; display: flex; align-items: flex-start; gap: 10px; }
+#bk-drawer .d-hd .x { margin-left: auto; border: 0; background: none; font-size: 20px; cursor: pointer; color: #8d91a9; line-height: 1; }
+#bk-drawer .d-st { font-size: 11.5px; font-weight: 800; color: #fff; padding: 2px 10px; border-radius: 20px; display: inline-block; margin-bottom: 6px; }
+#bk-drawer .d-title { font-weight: 800; font-size: 15px; color: #22263a; }
+#bk-drawer .d-bd { padding: 16px 18px; overflow: auto; flex: 1; }
+#bk-drawer .d-kv { display: grid; grid-template-columns: 108px 1fr; gap: 8px 10px; font-size: 13px; margin: 0 0 14px; }
+#bk-drawer .d-kv dt { color: #8d91a9; font-weight: 500; }
+#bk-drawer .d-kv dd { margin: 0; font-weight: 700; color: #22263a; word-break: break-all; }
+#bk-drawer .d-note-label { font-size: 11.5px; font-weight: 800; color: #8d91a9; margin: 0 0 4px; }
+#bk-drawer .d-note {
+    background: #fafbfd; border: 1px dashed #e3e5ef; border-radius: 8px; padding: 9px 12px;
+    font-size: 13px; color: #4b4f66; white-space: pre-wrap; word-break: break-word;
+}
+#bk-drawer .d-ft { padding: 12px 18px; border-top: 1px solid #eceef4; display: flex; gap: 8px; align-items: center; }
+#bk-drawer .d-confirm {
+    border: 0; background: #1a9c7b; color: #fff; border-radius: 8px;
+    font-size: 13px; font-weight: 800; padding: 9px 16px; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 6px;
+}
+#bk-drawer .d-confirm:hover { background: #16876b; }
+#bk-drawer .d-link { margin-left: auto; color: #70738a; font-size: 13px; font-weight: 700; text-decoration: none; }
+#bk-drawer .d-link:hover { color: #1faf8a; }
+
+@media (max-width: 1100px) {
+    .bk-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+    #bk-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    table.bk-cal td { height: 72px; min-height: 72px; }
+}
+</style>
+    <style>
+    .logo-mark { background:#022e7d; }
+    .mk-note { font-size:12px; color:#8d91a9; }
+    .quick-label { white-space:nowrap; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+    <div class="logo-bar">
+        <span class="logo-mark">M</span>
+        <div>
+            <div class="logo-title">MAKENOV</div>
+            <div class="logo-sub">비즈센터</div>
+        </div>
+    </div>
+    <nav class="sidebar-nav">
+        <div class="nav-item">
+            <a href="index.html"><i class="ti ti-layout-dashboard"></i> 대시보드</a>
+        </div>
+        <div class="nav-item">
+            <a href="buyers.html"><i class="ti ti-users-group"></i> 파트너 후보</a>
+        </div>
+        <div class="nav-item active">
+            <a href="meetings.html"><i class="ti ti-calendar-event"></i> 미팅 캘린더</a>
+        </div>
+        <div class="nav-item">
+            <a href="tokens.html"><i class="ti ti-coins"></i> 토큰·플랜</a>
+        </div>
+    </nav>
+    <a class="sidebar-guide" href="guide.html">
+        <i class="ti ti-help-circle"></i> 비즈센터 이용안내
+    </a>
+</div>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <div class="main">
+        <div class="topbar">
+    <div class="topbar-left">
+        <button type="button" class="sidebar-toggle" aria-label="비즈센터">
+            <i class="ti ti-menu-2"></i>
+        </button>
+        <div class="topbar-logo">내 파트너 미팅 운영</div>
+    </div>
+    <div class="topbar-right">
+        <div class="topbar-lang">
+            <i class="ti ti-language"></i>
+            <select class="lang-select" aria-label="언어">
+                <option value="ko" selected>한국어</option>
+                <option value="vi">Tiếng Việt</option>
+                <option value="en">English</option>
+            </select>
+        </div>
+        <div class="topbar-user"><i class="ti ti-user"></i> <span>demo@makenov.com</span></div>
+        <a href="login.html" class="logout-btn">로그아웃</a>
+    </div>
+</div>
+        <div class="content">
+<div class="ad-booking">
+    <div class="adc-heading">
+        <h2>미팅 캘린더</h2>
+        <span class="sub">파트너와의 온라인 미팅 일정을 확인하고 직접 확정할 수 있습니다.</span>
+    </div>
+
+    <!-- KPI -->
+    <div id="bk-kpis">
+        <div class="k-card total"><span class="k-label">이번 달 미팅</span><span class="k-value" id="kpi-total">-</span></div>
+        <div class="k-card confirmed"><span class="k-label">확정</span><span class="k-value" id="kpi-confirmed">-</span></div>
+        <div class="k-card pending"><span class="k-label">확정 대기</span><span class="k-value" id="kpi-pending">-</span></div>
+        <div class="k-card done"><span class="k-label">완료(회의록)</span><span class="k-value" id="kpi-done">-</span></div>
+    </div>
+
+    <div class="bk-grid">
+        <!-- 캘린더 -->
+        <div class="bk-card">
+            <div class="bk-card-head">
+                <div id="bk-toolbar">
+                    <button type="button" class="bk-btn" id="bk-prev">&lsaquo;</button>
+                    <span class="bk-month" id="bk-month-label"></span>
+                    <button type="button" class="bk-btn" id="bk-next">&rsaquo;</button>
+                    <button type="button" class="bk-btn" id="bk-today">오늘</button>
+                    <div class="sp"></div>
+                    <select id="bk-campaign"><option value="">전체 파트너</option><option value="1">호치민 화장품 유통사 A</option><option value="2">하노이 마트 체인 B</option><option value="3">다낭 온라인 셀러 C</option><option value="4">호치민 수입 총판 D</option><option value="5">껀터 약국 체인 E</option><option value="6">하노이 백화점 F</option></select>
+                </div>
+            </div>
+            <div class="bk-card-body">
+                <div id="bk-filters">
+                    <span class="fchip" data-s="pending"><span class="dot bk-s-pending"></span>확정 대기</span>
+                    <span class="fchip" data-s="confirmed"><span class="dot bk-s-confirmed"></span>확정</span>
+                    <span class="fchip" data-s="done"><span class="dot bk-s-done"></span>완료</span>
+                </div>
+
+                <table class="bk-cal">
+                    <thead><tr id="bk-weekdays"></tr></thead>
+                    <tbody id="bk-calbody"></tbody>
+                </table>
+
+                <div id="bk-legend">
+                    <span><i class="bk-s-pending"></i>확정 대기 (일정 제안됨)</span>
+                    <span><i class="bk-s-confirmed"></i>확정</span>
+                    <span><i class="bk-s-done"></i>완료 (회의록 등록)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 확정 대기 큐 -->
+        <div class="bk-side">
+<div class="bk-card up-card">
+    <div class="bk-card-head"><i class="ti ti-brand-google"></i> 다가오는 미팅 <span class="q-count up" id="up-count">0</span></div>
+    <div class="up-list" id="up-list"></div>
+    <div class="bk-note">구글 미트로 진행합니다. 미팅 시간이 되면 입장하기를 눌러 주세요.</div>
+</div>
+<div class="bk-card" id="bk-queue-card">
+            <div class="bk-card-head">
+                <i class="ti ti-alert-triangle"></i> 확정 대기                <span class="q-count" id="bk-queue-count">0</span>
+            </div>
+            <div class="bk-card-body" id="bk-queue">
+                <div class="q-empty">확정 대기 건이 없습니다.</div>
+            </div>
+            <div class="bk-note">파트너가 일정을 제안했지만 아직 확정하지 않은 미팅입니다. 항목을 누르면 바로 확정할 수 있습니다.</div>
+        </div>
+</div>
+    </div>
+</div>
+
+<!-- 드로어 -->
+<div id="bk-scrim"></div>
+<aside id="bk-drawer">
+    <div class="d-hd">
+        <div>
+            <span class="d-st" id="dr-status"></span>
+            <div class="d-title" id="dr-title"></div>
+        </div>
+        <button type="button" class="x" id="dr-close">&times;</button>
+    </div>
+    <div class="d-bd">
+        <dl class="d-kv">
+            <dt>파트너</dt><dd id="dr-user"></dd>
+            <dt>미팅 일시</dt><dd id="dr-visit"></dd>
+            <dt>참석자</dt><dd id="dr-name"></dd>
+            <dt>통역</dt><dd id="dr-people"></dd>
+            <dt>확정 시각</dt><dd id="dr-confirmed"></dd>
+            <dt>회의록 기한</dt><dd id="dr-due"></dd>
+        </dl>
+        <div id="dr-note-wrap" style="display:none">
+            <div class="d-note-label">안건</div>
+            <div class="d-note" id="dr-note"></div>
+        </div>
+    </div>
+    <div class="d-ft">
+        <button type="button" class="d-confirm" id="dr-confirm-btn"><i class="ti ti-calendar-check"></i> 미팅 일시 확정</button>
+        <a href="#" class="d-link" id="dr-campaign-link">파트너 보기 &rsaquo;</a>
+    </div>
+</aside>
+        
+        </div>
+        <footer class="app-footer">
+    MAKENOV 비즈센터 / 이메일 : notice@makenov.com<br>
+    이 화면은 시안이며 표시된 파트너와 수치는 샘플 데이터입니다.
+</footer>
+    </div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/sweetalert2.all.min.js"></script>
+    <script>
+  const Toast = Swal.mixin({
+    toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, timerProgressBar: true,
+    onOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  });
+  function mkDemo(msg) { Toast.fire({ icon: 'info', title: msg || '시안 화면입니다. 실제 처리는 되지 않습니다.' }); }
+    (function () {
+        document.addEventListener('click', function (e) {
+            var t = e.target;
+            if (t.closest && t.closest('.sidebar-toggle')) { document.body.classList.toggle('sidebar-open'); return; }
+            if ((t.closest && t.closest('#sidebar-overlay'))
+                || (t.closest && t.closest('.sidebar-nav a[href]:not([href="#"])'))
+                || (t.closest && t.closest('.sidebar-guide'))) {
+                document.body.classList.remove('sidebar-open');
+            }
+        });
+    })();
+    </script>
+<script>var MK_EVENTS = [{"id": 1, "article_id": 1, "status": "done", "visit_date": "2026-10-14", "visit_time": "15:00", "title": "온라인 미팅 (250토큰)", "username": "호치민 화장품 유통사 A", "visit_name_en": "구매 매니저 외 1명", "visit_people": "전담 마케터 동행", "confirmed_at": "2026-10-08 11:20", "content_due_at": "2026-10-16", "visit_note": "샘플 발송 조건, 첫 주문 수량"}, {"id": 2, "article_id": 3, "status": "pending", "visit_date": "2026-10-29", "visit_time": "10:00", "title": "온라인 미팅 (250토큰)", "username": "다낭 온라인 셀러 C", "visit_name_en": "대표", "visit_people": "전담 마케터 동행", "confirmed_at": "", "content_due_at": "2026-10-31", "visit_note": "온라인몰 입점 수수료와 배송 조건"}, {"id": 3, "article_id": 6, "status": "confirmed", "visit_date": "2026-11-12", "visit_time": "14:00", "title": "온라인 미팅 (250토큰)", "username": "하노이 백화점 F", "visit_name_en": "뷰티 MD", "visit_people": "전담 마케터 동행", "confirmed_at": "2026-10-24 16:05", "content_due_at": "2026-11-14", "visit_note": "백화점 팝업 입점 일정"}, {"id": 4, "article_id": 2, "status": "done", "visit_date": "2026-09-09", "visit_time": "16:00", "title": "온라인 미팅 (250토큰)", "username": "하노이 마트 체인 B", "visit_name_en": "구매팀장", "visit_people": "전담 마케터 동행", "confirmed_at": "2026-09-03 10:00", "content_due_at": "2026-09-11", "visit_note": "입점 절차와 마진 구조"}, {"id": 5, "article_id": 4, "status": "confirmed", "visit_date": "2026-10-30", "visit_time": "16:00", "title": "온라인 미팅 (250토큰)", "username": "호치민 수입 총판 D", "visit_name_en": "수입 담당 이사", "visit_people": "전담 마케터 동행", "confirmed_at": "2026-10-22 09:40", "content_due_at": "2026-11-01", "visit_note": "수입 통관 서류와 첫 물량"}, {"id": 6, "article_id": 1, "status": "confirmed", "visit_date": "2026-11-04", "visit_time": "15:00", "title": "후속 미팅 (250토큰)", "username": "호치민 화장품 유통사 A", "visit_name_en": "구매 매니저", "visit_people": "전담 마케터 동행", "confirmed_at": "2026-10-20 14:10", "content_due_at": "2026-11-06", "visit_note": "샘플 테스트 결과 공유"}];</script>
+<script>
+$(function () {
+    'use strict';
+
+    
+    var CAMPAIGNS_URL = 'buyer.html'; // + /{article_id}(#influencer) / + /{article_id}/visit-confirm
+
+    var STATUS_LABEL = {
+        pending:   "확정 대기",
+        confirmed: "확정",
+        done:      "완료"    };
+    var WEEKDAYS    = "일,월,화,수,목,금,토".split(',');
+    var MONTH_LABEL = "{0}년 {1}월";
+    var TXT = {
+        more:         "+{0}건",
+        notConfirmed: "미확정",
+        confirmAsk:   "이 미팅 일정을 확정하시겠습니까?",
+        confirmBtn:   "미팅 일정 확정",
+        cancel:       "취소",
+        queueEmpty:   "확정 대기 건이 없습니다."    };
+
+    var current   = { y: 2026, m: 10 }; // m: 1~12
+    var events    = [];
+    var hiddenSet = {};   // 꺼진 상태 필터
+    var currentEv = null; // 드로어에 열린 이벤트
+    var MAX_SHOW  = 4;
+
+    // 요일 헤더
+    (function () {
+        var html = '';
+        for (var i = 0; i < 7; i++) {
+            var cls = i === 0 ? 'sun' : (i === 6 ? 'sat' : '');
+            html += '<th class="' + cls + '">' + WEEKDAYS[i] + '</th>';
+        }
+        $('#bk-weekdays').html(html);
+    })();
+
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    function monthStr() { return current.y + '-' + pad(current.m); }
+    function escText(s) { return $('<i>').text(s == null ? '' : s).html(); }
+    // month_label 의 {2}: 현재 로케일의 월 이름 (영어 등 월 이름을 쓰는 언어용; 템플릿에 {2} 가 없으면 무시된다)
+    function monthName(y, m) {
+        try { return new Date(y, m - 1, 1).toLocaleString(document.documentElement.lang || 'en', { month: 'short' }); }
+        catch (e) { return String(m); }
+    }
+
+    function load() {
+        MAX_SHOW = 4;
+        $('#bk-month-label').text(MONTH_LABEL.replace('{0}', current.y).replace('{1}', current.m).replace('{2}', monthName(current.y, current.m)));
+        (function () {
+            var all = MK_EVENTS.filter(function (e) { return e.visit_date.slice(0, 7) === monthStr() && (!$('#bk-campaign').val() || String(e.article_id) === $('#bk-campaign').val()); });
+            events = all;
+            $('#kpi-total').text(all.length);
+            $('#kpi-confirmed').text(all.filter(function (e) { return e.status === 'confirmed'; }).length);
+            $('#kpi-pending').text(all.filter(function (e) { return e.status === 'pending'; }).length);
+            $('#kpi-done').text(all.filter(function (e) { return e.status === 'done'; }).length);
+            render();
+            renderQueue();
+        })();
+    }
+
+    function eventsByDay() {
+        var map = {};
+        events.forEach(function (ev) {
+            if (hiddenSet[ev.status]) return;
+            var d = parseInt(ev.visit_date.slice(8, 10), 10);
+            (map[d] = map[d] || []).push(ev);
+        });
+        Object.keys(map).forEach(function (d) {
+            map[d].sort(function (a, b) { return (a.visit_time || '99').localeCompare(b.visit_time || '99'); });
+        });
+        return map;
+    }
+
+    function render() {
+        var byDay    = eventsByDay();
+        var firstDow = new Date(current.y, current.m - 1, 1).getDay();
+        var daysIn   = new Date(current.y, current.m, 0).getDate();
+        var today    = new Date();
+        var isThisMonth = today.getFullYear() === current.y && (today.getMonth() + 1) === current.m;
+
+        var html = '', cell = 0;
+        for (var r = 0; r < 6; r++) {
+            if (cell - firstDow + 1 > daysIn) break;
+            html += '<tr>';
+            for (var c = 0; c < 7; c++, cell++) {
+                var day = cell - firstDow + 1;
+                if (day < 1 || day > daysIn) { html += '<td class="out"></td>'; continue; }
+                var isToday = isThisMonth && today.getDate() === day;
+                html += '<td class="' + (isToday ? 'today' : '') + '" data-day="' + day + '">';
+                html += '<span class="dn ' + (c === 0 ? 'sun' : '') + '">' + day + '</span>';
+                var list = byDay[day] || [];
+                for (var i = 0; i < list.length && i < MAX_SHOW; i++) {
+                    var ev = list[i];
+                    html += '<button type="button" class="bk-ev bk-s-' + ev.status + '" data-id="' + ev.id + '" title="'
+                        + escText(ev.title + ' · ' + ev.username).replace(/"/g, '&quot;') + '">'
+                        + (ev.visit_time ? ev.visit_time + ' ' : '')
+                        + escText(ev.username)
+                        + '</button>';
+                }
+                if (list.length > MAX_SHOW) {
+                    html += '<span class="bk-more" data-day="' + day + '">' + TXT.more.replace('{0}', list.length - MAX_SHOW) + '</span>';
+                }
+                html += '</td>';
+            }
+            html += '</tr>';
+        }
+        $('#bk-calbody').html(html);
+    }
+
+    function renderQueue() {
+        var pending = events.filter(function (ev) { return ev.status === 'pending'; });
+        pending.sort(function (a, b) { return (a.visit_date + a.visit_time).localeCompare(b.visit_date + b.visit_time); });
+        $('#bk-queue-count').text(pending.length);
+        if (!pending.length) {
+            $('#bk-queue').html('<div class="q-empty">' + TXT.queueEmpty + '</div>');
+            return;
+        }
+        var html = '';
+        pending.forEach(function (ev) {
+            html += '<div class="q-item" data-id="' + ev.id + '">'
+                + '<div class="q-t">' + escText(ev.title) + '</div>'
+                + '<div class="q-m">' + escText(ev.username) + ' · ' + ev.visit_date + (ev.visit_time ? ' ' + ev.visit_time : '') + '</div>'
+                + '</div>';
+        });
+        $('#bk-queue').html(html);
+    }
+
+    // ---- 내비게이션 ----
+    $('#bk-prev').on('click', function () { current.m--; if (current.m < 1)  { current.m = 12; current.y--; } load(); });
+    $('#bk-next').on('click', function () { current.m++; if (current.m > 12) { current.m = 1;  current.y++; } load(); });
+    $('#bk-today').on('click', function () { var t = new Date(); current = { y: t.getFullYear(), m: t.getMonth() + 1 }; load(); });
+    $('#bk-campaign').on('change', load);
+
+    // ---- 상태 필터 칩 ----
+    $('#bk-filters .fchip').on('click', function () {
+        var s = $(this).data('s');
+        $(this).toggleClass('off');
+        hiddenSet[s] = $(this).hasClass('off');
+        render();
+    });
+
+    // "+N건" → 해당 일 전체 표시 (임시로 MAX 해제 후 재렌더)
+    $(document).on('click', '.bk-more', function () {
+        MAX_SHOW = 99;
+        render();
+    });
+
+    // ---- 드로어 ----
+    function openDrawer(ev) {
+        currentEv = ev;
+        $('#dr-status').attr('class', 'd-st bk-s-' + ev.status).text(STATUS_LABEL[ev.status]);
+        $('#dr-title').text(ev.title);
+        $('#dr-user').text(ev.username);
+        $('#dr-visit').text(ev.visit_date + (ev.visit_time ? ' ' + ev.visit_time : ''));
+        $('#dr-name').text(ev.visit_name_en || '-');
+        $('#dr-people').text(ev.visit_people || '-');
+        $('#dr-confirmed').text(ev.confirmed_at || TXT.notConfirmed);
+        $('#dr-due').text(ev.content_due_at || '-');
+        $('#dr-note-wrap').toggle(!!ev.visit_note);
+        $('#dr-note').text(ev.visit_note || '');
+        // 신청자 상세(신청 정보 + 미팅 일정 확정) 페이지로 이동
+        $('#dr-campaign-link').attr('href', CAMPAIGNS_URL);
+
+        // 확정 대기 건에만 확정 버튼 노출 (확정 취소·일정 수정은 운영팀만 가능)
+        $('#dr-confirm-btn').toggle(ev.status === 'pending');
+
+        $('#bk-drawer').addClass('open');
+        $('#bk-scrim').addClass('open');
+    }
+    function closeDrawer() {
+        $('#bk-drawer').removeClass('open');
+        $('#bk-scrim').removeClass('open');
+        currentEv = null;
+    }
+    $('#bk-scrim, #dr-close').on('click', closeDrawer);
+    $(document).on('keydown', function (e) { if (e.key === 'Escape') closeDrawer(); });
+
+    $(document).on('click', '.bk-ev, .q-item', function () {
+        var id = $(this).data('id');
+        var ev = events.find(function (x) { return x.id === id; });
+        if (ev) openDrawer(ev);
+    });
+
+    // ---- 미팅 일정 확정 (기존 campaigns/{id}/visit-confirm 재사용, AJAX) ----
+    $('#dr-confirm-btn').on('click', function () {
+        if (!currentEv) return;
+        var ev = currentEv;
+        Swal.fire({
+            title: TXT.confirmAsk,
+            text: ev.username + ' · ' + ev.visit_date + (ev.visit_time ? ' ' + ev.visit_time : ''),
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: TXT.confirmBtn,
+            cancelButtonText: TXT.cancel,
+            confirmButtonColor: '#1a9c7b'
+        }).then(function (r) {
+            if (!r.value) return;
+            ev.status = 'confirmed'; ev.confirmed_at = '방금 (시안)';
+            Toast.fire({ icon: 'success', title: '미팅 일정을 확정했습니다' });
+            closeDrawer(); load();
+        });
+    });
+
+    load();
+});
+</script><style>
+.ad-booking .adc-heading h2{font-size:24px;letter-spacing:-.02em}
+#bk-kpis{gap:12px!important}
+#bk-kpis .k-card{border:1px solid #eceef4!important;border-left-width:1px!important;border-radius:14px!important;padding:18px 20px!important;position:relative}
+#bk-kpis .k-card .k-label{display:flex!important;align-items:center;gap:6px;font-size:13px!important;color:#70738a!important}
+#bk-kpis .k-card .k-label::before{content:"";width:8px;height:8px;border-radius:50%;background:#8d91a9}
+#bk-kpis .k-card.confirmed .k-label::before{background:#022E7D}
+#bk-kpis .k-card.pending .k-label::before{background:#f59f0b}
+#bk-kpis .k-card.done .k-label::before{background:#1faf8a}
+#bk-kpis .k-card .k-value{font-size:28px!important;font-weight:800!important;margin-top:6px;display:block;color:#22253a}
+.bk-grid{grid-template-columns:1fr 340px!important;gap:16px!important}
+.bk-card{border-radius:16px!important;border-color:#eceef4!important}
+.bk-card .bk-card-head{padding:16px 20px!important;font-weight:700}
+.bk-btn{border-radius:10px!important;height:36px;min-width:36px}
+.bk-month{font-size:19px!important;font-weight:800!important;letter-spacing:-.02em}
+#bk-filters{margin-bottom:12px}
+table.bk-cal{border-collapse:separate!important;border-spacing:0;border:1px solid #eef0f5;border-radius:12px;overflow:hidden}
+table.bk-cal th{background:#fafbfd!important;font-size:12.5px!important;font-weight:700!important;color:#8d91a9!important;padding:10px 0!important;border:0!important;border-bottom:1px solid #eef0f5!important}
+table.bk-cal td{border:0!important;border-right:1px solid #f1f2f6!important;border-bottom:1px solid #f1f2f6!important;height:108px!important;padding:8px!important;transition:background .15s}
+table.bk-cal tr td:last-child{border-right:0!important}
+table.bk-cal tbody tr:last-child td{border-bottom:0!important}
+table.bk-cal td:not(.out):hover{background:#fafbfd}
+table.bk-cal td.out{background:#fcfcfe!important}
+table.bk-cal td .dn{font-size:13px!important;font-weight:600!important;color:#4b4f66!important}
+table.bk-cal td .dn.sun{color:#e5484d!important}
+table.bk-cal td.today{background:#f6fdfa!important}
+table.bk-cal td.today .dn{background:#1faf8a!important;color:#fff!important;width:24px!important;height:24px!important}
+.bk-ev{border-radius:7px!important;padding:5px 8px 5px 10px!important;margin-top:6px!important;font-size:12px!important;font-weight:600!important;position:relative;box-shadow:none!important}
+.bk-ev.bk-s-pending{background:#fff4e2!important;color:#a85b00!important;border-left:3px solid #f59f0b!important}
+.bk-ev.bk-s-confirmed{background:#e8eefb!important;color:#022E7D!important;border-left:3px solid #022E7D!important}
+.bk-ev.bk-s-done{background:#e3f8f0!important;color:#16876b!important;border-left:3px solid #1faf8a!important}
+.dot.bk-s-pending,#bk-legend i.bk-s-pending{background:#f59f0b!important}
+.dot.bk-s-confirmed,#bk-legend i.bk-s-confirmed{background:#022E7D!important}
+.dot.bk-s-done,#bk-legend i.bk-s-done{background:#1faf8a!important}
+.bk-side{display:flex;flex-direction:column;gap:16px}
+.q-count.up{background:#e3f8f0!important;color:#16876b!important}
+.up-card .bk-note{padding:12px 20px 16px;border-top:1px solid #f1f2f6;font-size:12px;color:#8d91a9;line-height:1.6}
+.up-list{padding:6px 14px 4px}
+.up-item{display:flex;gap:12px;padding:14px 6px;border-bottom:1px solid #f1f2f6}
+.up-item:last-child{border-bottom:0}
+.up-date{width:50px;height:56px;border-radius:10px;background:#022E7D;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:none}
+.up-date small{font-size:10.5px;opacity:.75;font-weight:700}
+.up-date b{font-size:20px;font-weight:800;line-height:1.1}
+.up-body{flex:1;min-width:0}
+.up-name{font-size:14px;font-weight:700;color:#22253a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.up-meta{font-size:12.5px;color:#8d91a9;margin-top:2px}
+.up-left{display:inline-flex;align-items:center;gap:4px;font-size:12.5px;font-weight:700;color:#16876b;margin-top:6px}
+.up-left.soon{color:#c26a00}
+.up-join{display:flex;align-items:center;justify-content:center;gap:5px;margin-top:10px;height:36px;border-radius:9px;background:#1faf8a;color:#fff;font-size:13px;font-weight:700;border:0;width:100%;cursor:pointer;font-family:inherit}
+.up-join:hover{background:#16876b}
+.up-empty{padding:24px 6px;text-align:center;color:#8d91a9;font-size:13px}
+@media (max-width:1100px){.bk-grid{grid-template-columns:1fr!important}}
+</style>
+<script>
+(function () {
+    var W = ['일', '월', '화', '수', '목', '금', '토'];
+    function left(ms) {
+        var m = Math.floor(ms / 60000), d = Math.floor(m / 1440), h = Math.floor((m % 1440) / 60), mi = m % 60;
+        if (ms <= 0) return '지금 미팅 시간입니다';
+        if (d > 0) return d + '일 ' + h + '시간 남음';
+        if (h > 0) return h + '시간 ' + mi + '분 남음';
+        return mi + '분 남음';
+    }
+    function draw() {
+        var now = new Date();
+        var up = MK_EVENTS.filter(function (e) { return e.status === 'confirmed' && new Date(e.visit_date + 'T' + (e.visit_time || '00:00')) - now > -60 * 60000; })
+            .sort(function (a, b) { return (a.visit_date + a.visit_time).localeCompare(b.visit_date + b.visit_time); });
+        document.getElementById('up-count').textContent = up.length;
+        var box = document.getElementById('up-list');
+        if (!up.length) { box.innerHTML = '<div class="up-empty">확정된 미팅이 없습니다.</div>'; return; }
+        box.innerHTML = up.map(function (e) {
+            var at = new Date(e.visit_date + 'T' + (e.visit_time || '00:00')), ms = at - now, soon = ms < 30 * 60000;
+            return '<div class="up-item"><div class="up-date"><small>' + (at.getMonth() + 1) + '월</small><b>' + at.getDate() + '</b></div>'
+                + '<div class="up-body"><div class="up-name">' + e.username + '</div>'
+                + '<div class="up-meta">' + W[at.getDay()] + '요일 ' + e.visit_time + ' · ' + e.visit_note + '</div>'
+                + '<div class="up-left' + (soon ? ' soon' : '') + '"><i class="ti ti-bell-ringing"></i> ' + left(ms) + '</div>'
+                + '<button type="button" class="up-join" data-n="' + e.username + '"><i class="ti ti-video"></i> 입장하기</button></div></div>';
+        }).join('');
+    }
+    document.addEventListener('click', function (ev) {
+        var b = ev.target.closest('.up-join');
+        if (b) Toast.fire({ icon: 'info', title: '구글 미트 미팅방으로 입장합니다' });
+    });
+    draw(); setInterval(draw, 30000);
+})();
+</script>
+</body>
+</html>

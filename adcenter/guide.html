@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>이용안내 - MAKENOV 비즈센터</title>
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css">
+    <link href="assets/css/ad-style.css" rel="stylesheet">
+    <style>
+.ad-dashboard { color: #2b2b2b; }
+.adc-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+.adc-heading h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.2px;
+}
+.media-tabs {
+    display: inline-flex;
+    gap: 6px;
+    background: #f2f3f8;
+    border-radius: 999px;
+    padding: 4px;
+}
+.media-tab-btn {
+    border: 0;
+    background: transparent;
+    border-radius: 999px;
+    color: #70738a;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 7px 12px;
+    cursor: pointer;
+}
+.media-tab-btn.active {
+    background: #ffffff;
+    box-shadow: 0 1px 8px rgba(43, 47, 81, 0.12);
+    color: #1faf8a;
+}
+
+.ad-overview {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+.ring-group {
+    background: #fff;
+    border: 1px solid #eceef4;
+    border-radius: 12px;
+    padding: 14px;
+}
+.ring-title {
+    font-size: 13px;
+    color: #777b92;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+.rings {
+    display: flex;
+    gap: 14px;
+}
+.ring-item {
+    flex: 1;
+    text-align: center;
+}
+.ring {
+    width: 114px;
+    height: 114px;
+    border-radius: 50%;
+    margin: 0 auto 8px;
+    background: conic-gradient(#27caa1 var(--deg, 0deg), #e3f7f1 var(--deg, 0deg));
+    position: relative;
+}
+.ring::after {
+    content: "";
+    width: 82px;
+    height: 82px;
+    border-radius: 50%;
+    background: #fff;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+}
+.ring-num {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 2;
+    font-weight: 800;
+    color: #22263a;
+    font-size: 24px;
+}
+.ring-label {
+    font-size: 12px;
+    color: #7f8296;
+    font-weight: 700;
+}
+
+.quick-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+}
+.quick-card {
+    background: #fff;
+    border: 1px solid #eceef4;
+    border-radius: 10px;
+    padding: 25px 30px 25px 15px;
+    min-height: 98px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.quick-label {
+    color: #8d91a9;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 22px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.quick-label .ti {
+    font-size: 30px;
+    color: #022e7d;
+}
+.quick-value {
+    text-align: right;
+    font-size: 34px;
+    line-height: 1;
+    font-weight: 800;
+    color: #1f2240;
+}
+
+.section-card {
+    background: #fff;
+    border: 1px solid #eceef4;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+}
+.section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+.section-head h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 800;
+    color: #3a3e57;
+}
+.date-badge {
+    font-size: 12px;
+    color: #878ca6;
+    background: #f5f6fc;
+    border-radius: 6px;
+    padding: 4px 8px;
+}
+.chart-wrap {
+    height: 220px;
+    border: 1px solid #f0f1f6;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    background:
+        repeating-linear-gradient(to bottom, #ffffff 0, #ffffff 33px, #f5f6fb 34px),
+        linear-gradient(to bottom, #ffffff, #ffffff);
+}
+#trend-chart {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.chart-legend {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+}
+.legend-item {
+    font-size: 12px;
+    color: #7e829b;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    display: inline-block;
+}
+.dot-contents { background: #27caa1; }
+.dot-applicants { background: #022e7d; }
+
+.simple-list {
+    width: 100%;
+    border-collapse: collapse;
+}
+.simple-list th,
+.simple-list td {
+    padding: 10px;
+    font-size: 13px;
+    border-bottom: 1px solid #f1f2f8;
+    text-align: left;
+}
+.simple-list th {
+    color: #8c90a7;
+    font-weight: 700;
+}
+.simple-list td {
+    color: #31364f;
+}
+.simple-list tr:last-child td { border-bottom: 0; }
+.empty-block {
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b5b8c8;
+    font-size: 13px;
+}
+
+@media (max-width: 1180px) {
+    .ad-overview {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 900px) {
+    .quick-metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+@media (max-width: 640px) {
+    .adc-heading {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    /* 미디어 탭: 6개가 한 줄에 안 들어가므로 가로 스크롤 */
+    .media-tabs {
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .media-tab-btn { white-space: nowrap; font-size: 14px; padding: 7px 10px; }
+
+    /* 링 2개는 나란히 두는 편이 세로 공간을 아낀다 */
+    .rings { justify-content: center; }
+    .ring { width: 100px; height: 100px; }
+    .ring::after { width: 72px; height: 72px; top: 14px; left: 14px; }
+    .ring-num { font-size: 21px; }
+
+    .quick-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .quick-card { padding: 14px; min-height: 84px; }
+    .quick-label { margin-bottom: 12px; }
+    .quick-label .ti { font-size: 22px; }
+    .quick-value { font-size: 25px; }
+
+    .chart-wrap { height: 170px; }
+
+    /* JS 렌더 테이블: 좁은 화면에서는 가로 스크롤 */
+    #top-campaigns-wrap, #report-wrap, #contents-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    #top-campaigns-wrap .simple-list,
+    #report-wrap .simple-list,
+    #contents-wrap .simple-list { min-width: 480px; }
+}
+</style>
+    <style>
+    .logo-mark { background:#022e7d; }
+    .mk-note { font-size:12px; color:#8d91a9; }
+    .quick-label { white-space:nowrap; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+    <div class="logo-bar">
+        <span class="logo-mark">M</span>
+        <div>
+            <div class="logo-title">MAKENOV</div>
+            <div class="logo-sub">비즈센터</div>
+        </div>
+    </div>
+    <nav class="sidebar-nav">
+        <div class="nav-item">
+            <a href="index.html"><i class="ti ti-layout-dashboard"></i> 대시보드</a>
+        </div>
+        <div class="nav-item">
+            <a href="buyers.html"><i class="ti ti-users-group"></i> 파트너 후보</a>
+        </div>
+        <div class="nav-item">
+            <a href="meetings.html"><i class="ti ti-calendar-event"></i> 미팅 캘린더</a>
+        </div>
+        <div class="nav-item">
+            <a href="tokens.html"><i class="ti ti-coins"></i> 토큰·플랜</a>
+        </div>
+    </nav>
+    <a class="sidebar-guide active" href="guide.html">
+        <i class="ti ti-help-circle"></i> 비즈센터 이용안내
+    </a>
+</div>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <div class="main">
+        <div class="topbar">
+    <div class="topbar-left">
+        <button type="button" class="sidebar-toggle" aria-label="비즈센터">
+            <i class="ti ti-menu-2"></i>
+        </button>
+        <div class="topbar-logo">내 파트너 미팅 운영</div>
+    </div>
+    <div class="topbar-right">
+        <div class="topbar-lang">
+            <i class="ti ti-language"></i>
+            <select class="lang-select" aria-label="언어">
+                <option value="ko" selected>한국어</option>
+                <option value="vi">Tiếng Việt</option>
+                <option value="en">English</option>
+            </select>
+        </div>
+        <div class="topbar-user"><i class="ti ti-user"></i> <span>demo@makenov.com</span></div>
+        <a href="login.html" class="logout-btn">로그아웃</a>
+    </div>
+</div>
+        <div class="content">
+<div class="ad-dashboard">
+    <div class="adc-heading">
+        <h2>비즈센터 이용안내</h2>
+    </div>
+    <div class="section-card">
+        <div class="section-head"><h3><i class="ti ti-rocket" style="color:#1faf8a;"></i> 1. 시작 세팅</h3></div>
+        <div style="font-size:14px;color:#4b4f66;line-height:1.75;">메이크노브 등록, 베트남어 상세페이지, 영업자료 현지화, 시장조사를 진행합니다. 세팅이 끝난 날부터 계약 기간이 시작됩니다.</div>
+    </div>
+    <div class="section-card">
+        <div class="section-head"><h3><i class="ti ti-users-group" style="color:#1faf8a;"></i> 2. 파트너 후보 받기</h3></div>
+        <div style="font-size:14px;color:#4b4f66;line-height:1.75;">매달 제품에 맞는 파트너 후보 10곳을 제안합니다. 신청한 파트너가 부족하면 현지 네트워크로 채웁니다.</div>
+    </div>
+    <div class="section-card">
+        <div class="section-head"><h3><i class="ti ti-eye" style="color:#1faf8a;"></i> 3. 열람과 연락처 보기</h3></div>
+        <div style="font-size:14px;color:#4b4f66;line-height:1.75;">파트너 정보와 연락처는 무료로 볼 수 있습니다. 파트너가 공개에 동의한 연락처만 보여 드립니다.</div>
+    </div>
+    <div class="section-card">
+        <div class="section-head"><h3><i class="ti ti-calendar-plus" style="color:#1faf8a;"></i> 4. 미팅 신청</h3></div>
+        <div style="font-size:14px;color:#4b4f66;line-height:1.75;">후보 중 한 곳을 골라 이번 달 온라인 미팅을 신청합니다. 10곳 중 고르지 못하면 3곳을 더 제안하고, 그래도 고르지 못하면 그달 미팅은 하지 않고, 토큰은 다음 달로 넘어갑니다.</div>
+    </div>
+    <div class="section-card">
+        <div class="section-head"><h3><i class="ti ti-video" style="color:#1faf8a;"></i> 5. 미팅과 회의록</h3></div>
+        <div style="font-size:14px;color:#4b4f66;line-height:1.75;">미팅은 구글 미트로 진행하고 통역과 사전·사후 지원이 들어갑니다. 미팅이 끝나면 회의록을 올려 드립니다. 파트너가 취소하거나 나오지 않으면 다른 파트너로 다시 잡아 드립니다.</div>
+    </div>
+    <div class="section-card">
+        <div class="section-head"><h3><i class="ti ti-coins" style="color:#1faf8a;"></i> 6. 토큰</h3></div>
+        <div style="font-size:14px;color:#4b4f66;line-height:1.75;">1만 원은 10토큰이며 토큰은 미팅에만 씁니다. 온라인 미팅은 1회에 250토큰이고, 매달 플랜별로 250, 300, 350토큰을 드립니다. 부족하면 추가로 충전할 수 있습니다. 남은 토큰은 계약 기간 안에서 다음 달로 넘어갑니다.</div>
+    </div>
+</div>
+        </div>
+        <footer class="app-footer">
+    MAKENOV 비즈센터 / 이메일 : notice@makenov.com<br>
+    이 화면은 시안이며 표시된 파트너와 수치는 샘플 데이터입니다.
+</footer>
+    </div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/sweetalert2.all.min.js"></script>
+    <script>
+  const Toast = Swal.mixin({
+    toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, timerProgressBar: true,
+    onOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  });
+  function mkDemo(msg) { Toast.fire({ icon: 'info', title: msg || '시안 화면입니다. 실제 처리는 되지 않습니다.' }); }
+    (function () {
+        document.addEventListener('click', function (e) {
+            var t = e.target;
+            if (t.closest && t.closest('.sidebar-toggle')) { document.body.classList.toggle('sidebar-open'); return; }
+            if ((t.closest && t.closest('#sidebar-overlay'))
+                || (t.closest && t.closest('.sidebar-nav a[href]:not([href="#"])'))
+                || (t.closest && t.closest('.sidebar-guide'))) {
+                document.body.classList.remove('sidebar-open');
+            }
+        });
+    })();
+    </script>
+
+</body>
+</html>

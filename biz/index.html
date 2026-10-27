@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAKENOV 비즈센터 | 든든한 해외영업 파트너, 메이크노브</title>
+<meta name="description" content="매달 베트남 파트너 10곳을 골라 드리고, 통역 붙여서 바로 만나게 해 드립니다. 든든한 해외영업 파트너, 메이크노브.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css">
+<style>
+:root{
+  --pri:#27CAA1; --pri-d:#1FAF8A; --pri-dd:#16876b; --pri-soft:#E9FAF5; --mint:#3FE9C0;
+  --navy:#022E7D; --navy-dd:#04143F; --ink:#16181d; --body:#4b4f5c; --muted:#8a8f9c; --line:#e8ebf0; --bg-soft:#f6f8fb;
+  --r:20px; --maxw:1200px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);background:#fff;word-break:keep-all;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+section{scroll-margin-top:72px}
+.kick{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--pri-d);letter-spacing:.02em}
+.sec{padding:120px 0}
+.sec-head{text-align:center;max-width:820px;margin:0 auto 56px}
+.sec-head h2{font-size:44px;line-height:1.3;font-weight:800;letter-spacing:-.03em;margin-top:14px}
+.sec-head p{font-size:18px;line-height:1.7;color:var(--body);margin-top:16px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:56px;padding:0 28px;border-radius:14px;font-size:17px;font-weight:700;cursor:pointer;border:0;font-family:inherit;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn-pri{background:var(--pri);color:#fff}
+.btn-pri:hover{background:var(--pri-d)}
+.btn-line{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.35)}
+
+/* 머리글 */
+.hd{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hd .wrap{display:flex;align-items:center;height:72px;gap:32px}
+.hd .logo{display:flex;align-items:center;gap:12px}
+.hd .logo img{height:26px}
+.hd .slg{font-size:13px;font-weight:600;color:var(--pri-d);padding-left:12px;border-left:1px solid var(--line);white-space:nowrap}
+.hd nav{display:flex;align-items:center;gap:28px;font-size:15px;font-weight:600;color:var(--body);height:100%;white-space:nowrap}
+.hd nav > a,.hd .dd > a{display:flex;align-items:center;gap:4px;height:100%}
+.hd .dd{position:relative;height:100%}
+.hd .dd > a i{font-size:15px;color:var(--muted)}
+.hd .menu{position:absolute;top:100%;left:-20px;min-width:240px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 20px 40px rgba(4,20,63,.1);padding:8px;opacity:0;visibility:hidden;transform:translateY(6px);transition:.18s}
+.hd .dd:hover .menu,.hd .dd:focus-within .menu{opacity:1;visibility:visible;transform:none}
+.hd .menu{min-width:280px}
+.hd .menu a{display:flex;flex-direction:column;gap:3px;padding:13px 16px;border-radius:10px;color:var(--ink)}
+.hd .menu a b{font-size:15px;font-weight:700}
+.hd .menu a small{font-size:13px;font-weight:500;color:var(--muted)}
+.hd .menu a:hover{background:var(--pri-soft)}
+.hd nav a:hover{color:var(--ink)}
+.hd .right{margin-left:auto;display:flex;gap:8px}
+.hd .right a{height:42px;padding:0 18px;border-radius:999px;display:inline-flex;align-items:center;font-size:14px;font-weight:700;white-space:nowrap}
+.hd .login{border:1px solid var(--line)}
+.hd .login:hover{border-color:var(--pri);color:var(--pri-d)}
+.hd .apply{background:var(--pri);color:#fff}
+
+/* 1. 히어로 */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(4,20,63,.92) 0%,rgba(2,46,125,.86) 60%,rgba(4,20,63,.95) 100%),var(--navy-dd) url('about-assets/ee1c76.hero-bg-new.avif') center/cover no-repeat;color:#fff;padding:96px 0 0}
+.hero .wrap{position:relative;z-index:2;text-align:center}
+.hero .kick{color:var(--mint)}
+.hero h1{font-size:64px;line-height:1.22;font-weight:800;letter-spacing:-.04em;margin-top:18px}
+.hero h1 em{font-style:normal;color:var(--mint)}
+.hero .lead{font-size:20px;line-height:1.7;color:rgba(255,255,255,.78);margin-top:22px}
+.hero .lead b{color:#fff;font-weight:800;box-shadow:inset 0 -10px 0 rgba(63,233,192,.35)}
+.hero .cta{display:flex;gap:12px;justify-content:center;margin-top:36px}
+.hero .note{font-size:14px;color:rgba(255,255,255,.5);margin-top:18px}
+.stage{position:relative;max-width:980px;margin:64px auto 0}
+.screen{border-radius:18px 18px 0 0;overflow:hidden;box-shadow:0 -10px 60px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.12);border-bottom:0;background:#fff}
+.screen .bar{height:34px;background:#eef1f6;display:flex;align-items:center;gap:6px;padding:0 14px}
+.screen .bar i{width:10px;height:10px;border-radius:50%;background:#d5dae3}
+.screen .bar span{margin-left:12px;font-size:12px;color:#8a8f9c;background:#fff;border-radius:6px;padding:3px 12px}
+.screen img{width:100%;aspect-ratio:16/8.2;object-fit:cover;object-position:top}
+.float{position:absolute;background:#fff;color:var(--ink);border-radius:16px;padding:16px 18px;box-shadow:0 20px 40px rgba(4,20,63,.28);display:flex;align-items:center;gap:12px;text-align:left;animation:bob 5s ease-in-out infinite}
+.float .ic{width:42px;height:42px;border-radius:12px;background:var(--pri-soft);color:var(--pri-d);display:flex;align-items:center;justify-content:center;font-size:22px;flex:none}
+.float b{display:block;font-size:16px;font-weight:800}
+.float small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.f1{left:-90px;top:70px}
+.f2{right:-100px;top:150px;animation-delay:-1.6s}
+.f3{left:-60px;bottom:40px;animation-delay:-3.2s}
+.f4{right:-80px;bottom:70px;animation-delay:-2.4s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* 2. 고민 */
+.worry{position:relative;background:#06090f;color:#fff;overflow:hidden;padding:130px 0}
+.worry .ph{position:absolute;top:0;right:0;bottom:0;width:58%}
+.worry .ph img{width:100%;height:100%;object-fit:cover;object-position:52% 45%}
+.worry .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#06090f 0%,rgba(6,9,15,.75) 22%,rgba(6,9,15,0) 55%),linear-gradient(0deg,rgba(6,9,15,.7) 0%,rgba(6,9,15,0) 35%)}
+.worry .cap{position:absolute;right:56px;bottom:48px;z-index:1;text-align:right;font-size:15px;line-height:1.6;color:rgba(255,255,255,.6)}
+.worry .in{position:relative;z-index:2;max-width:560px}
+.worry h2 span{white-space:nowrap}
+.worry .kick{color:var(--mint)}
+.worry h2{font-size:clamp(32px,3.1vw,46px);line-height:1.3;font-weight:800;letter-spacing:-.035em;margin-top:16px;word-break:keep-all}
+.pains{margin-top:64px;position:relative}
+.pains::before{content:"";position:absolute;left:27px;top:12px;bottom:12px;width:1px;background:linear-gradient(180deg,rgba(63,233,192,.6),rgba(63,233,192,0))}
+.pain{position:relative;display:flex;gap:28px;align-items:flex-start;padding:0 0 44px}
+.pain:last-child{padding-bottom:0}
+.pain:nth-child(2){margin-left:72px}
+.pain .n{flex:none;width:56px;height:56px;border-radius:50%;border:1px solid rgba(63,233,192,.55);background:#06090f;color:var(--mint);font-size:17px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.pain h3{font-size:24px;line-height:1.4;font-weight:800;letter-spacing:-.02em;margin-top:12px}
+.pain p{font-size:16px;line-height:1.7;color:rgba(255,255,255,.62);margin-top:8px;word-break:keep-all}
+
+/* 2-1. 전담 마케터 */
+.mkt{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;max-width:1040px;margin:0 auto}
+.mcard{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-dd) 100%);color:#fff;border-radius:28px;padding:48px 44px;position:relative;overflow:hidden;box-shadow:0 30px 60px rgba(4,20,63,.18)}
+.mcard::before{content:"";position:absolute;right:-80px;top:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(63,233,192,.28),rgba(63,233,192,0) 70%)}
+.mcard .av{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:34px;color:var(--mint);position:relative}
+.mcard .badge{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--navy-dd);background:var(--mint);border-radius:999px;padding:5px 12px;margin-top:28px;position:relative}
+.mcard h3{font-size:32px;font-weight:800;letter-spacing:-.03em;margin-top:12px;position:relative}
+.mcard .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;position:relative}
+.mcard .chips span{font-size:15px;font-weight:600;border:1px solid rgba(255,255,255,.22);border-radius:10px;padding:8px 14px}
+.sols{list-style:none}
+.sols li{display:flex;gap:20px;padding:26px 0;border-top:1px solid var(--line)}
+.sols li:last-child{border-bottom:1px solid var(--line)}
+.sols .n{flex:none;font-size:15px;font-weight:800;color:var(--pri-d);padding-top:4px}
+.sols h4{font-size:22px;font-weight:800;letter-spacing:-.02em}
+.sols h4 em{font-style:normal;color:var(--pri-d)}
+.sols p{font-size:16px;color:var(--body);margin-top:6px}
+
+/* 3. 한 달 흐름 (탭) */
+.flow{background:var(--bg-soft)}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border:1px solid var(--line);border-radius:16px;padding:6px;max-width:900px;margin:0 auto 40px}
+.tab{border:0;background:none;font-family:inherit;padding:16px 10px;border-radius:12px;cursor:pointer;text-align:center}
+.tab small{display:block;font-size:13px;font-weight:700;color:var(--muted)}
+.tab b{display:block;font-size:17px;font-weight:800;color:var(--body);margin-top:4px}
+.tab.on{background:var(--navy)}
+.tab.on small{color:var(--mint)}
+.tab.on b{color:#fff}
+.pane{display:none;grid-template-columns:1fr 1.15fr;gap:56px;align-items:center;background:#fff;border-radius:24px;padding:48px;border:1px solid var(--line)}
+.pane.on{display:grid;animation:pin .45s ease}
+@keyframes pin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.ftrack{height:340vh;position:relative}
+.fstick{position:sticky;top:72px;min-height:calc(100vh - 72px);display:flex;flex-direction:column;justify-content:center;padding:24px 0}
+.tabs{width:100%}
+.pane h3{font-size:34px;line-height:1.35;font-weight:800;letter-spacing:-.03em}
+.pane p{font-size:17px;line-height:1.75;color:var(--body);margin-top:16px}
+.pane ul{list-style:none;margin-top:22px;display:grid;gap:10px}
+.pane li{display:flex;gap:10px;font-size:16px;font-weight:600}
+.pane li i{color:var(--pri-d);font-size:20px}
+.pane .shot{border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 18px 40px rgba(4,20,63,.08)}
+.pane .shot img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top left}
+
+/* 4. 비즈센터 */
+.split{display:grid;grid-template-columns:1fr 1.25fr;gap:64px;align-items:center}
+.split + .split{margin-top:96px}
+.split.rev .txt{order:2}
+.split h3{font-size:36px;line-height:1.35;font-weight:800;letter-spacing:-.03em;margin-top:12px}
+.split p{font-size:17px;line-height:1.75;color:var(--body);margin-top:16px}
+.split .shot{border-radius:20px;overflow:hidden;background:var(--pri-soft);padding:28px}
+.split .shot img{border-radius:12px;box-shadow:0 18px 40px rgba(4,20,63,.12);aspect-ratio:16/10;object-fit:cover;object-position:top left;width:100%}
+
+/* 5. 숫자 */
+.nums{background:var(--navy);color:#fff;padding:96px 0}
+.nums-h{font-size:36px;font-weight:800;letter-spacing:-.03em;line-height:1.35;margin-bottom:56px}
+.nums .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.num{border-left:1px solid rgba(255,255,255,.16);padding:8px 0 8px 28px}
+.num:first-child{border-left:0;padding-left:0}
+.num b{display:block;font-size:52px;font-weight:800;letter-spacing:-.03em;color:var(--mint)}
+.num span{display:block;font-size:17px;font-weight:700;margin-top:6px}
+.num small{display:block;font-size:14px;color:rgba(255,255,255,.6);margin-top:6px;line-height:1.6}
+
+/* 6. 등록 제품 */
+.roll{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.track{display:flex;gap:18px;width:max-content;animation:roll 60s linear infinite}
+.roll:hover .track{animation-play-state:paused}
+.track.rev{animation-direction:reverse;margin-top:18px}
+@keyframes roll{to{transform:translateX(-50%)}}
+.pcard{width:260px;border-radius:16px;overflow:hidden;background:#fff;border:1px solid var(--line)}
+.pcard img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.pcard div{padding:14px 16px}
+.pcard b{display:block;font-size:12px;font-weight:800;color:var(--pri-d);letter-spacing:.03em}
+.pcard span{display:block;font-size:15px;font-weight:700;margin-top:4px;line-height:1.4}
+
+/* 7. 플랜 */
+.plans{background:var(--bg-soft)}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.plan{background:#fff;border:1px solid var(--line);border-radius:24px;padding:36px 32px;display:flex;flex-direction:column}
+.plan.best{border:2px solid var(--pri);position:relative}
+.plan .tag{position:absolute;top:-14px;left:32px;background:var(--navy);color:#fff;font-size:13px;font-weight:700;padding:6px 12px;border-radius:999px}
+.plan h3{font-size:20px;font-weight:800;color:var(--body)}
+.plan .mo{margin-top:18px;font-size:15px;color:var(--muted)}
+.plan .mo b{font-size:44px;font-weight:800;color:var(--ink);letter-spacing:-.03em;margin:0 4px}
+.plan .tot{font-size:16px;font-weight:700;color:var(--pri-dd);margin-top:6px}
+.plan ul{list-style:none;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);display:grid;gap:12px;flex:1;align-content:start}
+.plan li{display:flex;gap:10px;font-size:15px;line-height:1.5;color:var(--body)}
+.plan li i{color:var(--pri-d);font-size:18px;margin-top:1px}
+.plan li.hl{color:var(--ink);font-weight:700}
+.plan .btn{margin-top:28px;width:100%}
+.plan .btn-ghost{background:var(--pri-soft);color:var(--pri-dd)}
+.pnote{text-align:center;font-size:14px;color:var(--muted);margin-top:24px}
+
+/* KFESTA */
+.kf{background:radial-gradient(1200px 500px at 85% 0%,rgba(63,233,192,.12),rgba(63,233,192,0) 60%),linear-gradient(160deg,#04143F 0%,#021033 100%);color:#fff;padding:120px 0;overflow:hidden}
+.kf-in{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.kf-logo{height:40px;width:auto}
+.kf .kick{color:var(--mint);margin-top:36px}
+.kf h2{font-size:clamp(30px,2.9vw,42px);line-height:1.3;font-weight:800;letter-spacing:-.035em;margin-top:12px}
+.kf p{font-size:17px;line-height:1.8;color:rgba(255,255,255,.72);margin-top:20px}
+.kf h2 span{white-space:nowrap}
+.kf-facts{list-style:none;margin-top:32px;border-top:1px solid rgba(255,255,255,.14)}
+.kf-facts li{display:flex;justify-content:space-between;gap:20px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+.kf-facts b{font-size:16px;font-weight:700}
+.kf-facts span{font-size:15px;color:rgba(255,255,255,.6);text-align:right}
+.kf .btn{margin-top:36px}
+.kf-gal{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:240px 170px 170px;gap:12px}
+.kf-gal img{width:100%;height:100%;object-fit:cover;border-radius:16px}
+.kf-gal .g1{grid-column:1 / span 2}
+/* 8. KFESTA (구) */
+.event{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center;background:linear-gradient(120deg,var(--navy-dd),var(--navy));color:#fff;border-radius:28px;padding:48px 56px}
+.event .date{width:120px;height:132px;border-radius:20px;background:#fff;color:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.event .date small{font-size:15px;font-weight:700}
+.event .date b{font-size:52px;font-weight:800;line-height:1.1}
+.event .date span{font-size:14px;font-weight:600;color:var(--muted)}
+.event .k{color:var(--mint)}
+.event h3{font-size:34px;font-weight:800;letter-spacing:-.02em;margin-top:10px;line-height:1.35}
+.event p{font-size:17px;line-height:1.7;color:rgba(255,255,255,.78);margin-top:12px}
+.event .meta{display:flex;flex-wrap:wrap;gap:20px;margin-top:18px;font-size:15px;color:rgba(255,255,255,.85)}
+.event .meta span{display:flex;align-items:center;gap:6px}
+.event .date.kf{width:140px}
+.event .date.kf small{font-size:12px;color:var(--muted)}
+.event .date.kf b{font-size:24px;letter-spacing:-.02em;margin:4px 0}
+
+
+/* 9. FAQ */
+.faq{max-width:880px;margin:0 auto;display:grid;gap:14px}
+.faq details{background:var(--bg-soft);border-radius:18px;padding:0 32px}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:26px 0;font-size:19px;font-weight:700}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary i{font-size:22px;color:var(--muted);transition:transform .2s;flex:none}
+.faq details[open] summary i{transform:rotate(180deg)}
+.faq .a{font-size:17px;line-height:1.75;color:var(--body);padding:0 0 28px}
+
+/* 10. 상담 신청 */
+.apply{background:var(--bg-soft)}
+.agrid{display:grid;grid-template-columns:1fr 1.5fr;gap:56px;align-items:start}
+.agrid h2{font-size:44px;font-weight:800;letter-spacing:-.03em;line-height:1.3;margin-top:14px}
+.agrid .side p{font-size:18px;line-height:1.7;color:var(--body);margin-top:16px}
+.agrid .side .mail{margin-top:24px;font-size:15px;color:var(--body)}
+.form{background:#fff;border-radius:24px;padding:36px;border:1px solid var(--line)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fld{margin-bottom:16px}
+.fld label{display:block;font-size:14px;font-weight:700;margin-bottom:8px}
+.fld label i{color:var(--pri-d);font-style:normal}
+.fld input,.fld select,.fld textarea{width:100%;height:50px;border:1px solid #dfe3ea;border-radius:12px;padding:0 14px;font-size:15px;font-family:inherit;color:var(--ink);background:#fff}
+.fld textarea{height:120px;padding:12px 14px;resize:vertical}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:2px solid var(--pri-soft);border-color:var(--pri)}
+.agree{display:flex;gap:8px;font-size:14px;color:var(--body);margin:4px 0 20px}
+.form .btn{width:100%}
+
+/* 11. 마지막 */
+.last{background:linear-gradient(180deg,rgba(4,20,63,.9),rgba(2,46,125,.9)),var(--navy-dd) url('about-assets/ee1c76.hero-bg-new.avif') center/cover;color:#fff;text-align:center;padding:110px 0}
+.last h2{font-size:48px;font-weight:800;letter-spacing:-.03em;line-height:1.3}
+.last .pre{font-size:18px;color:rgba(255,255,255,.75);margin-bottom:16px}
+.last h2 em{font-style:normal;color:var(--mint)}
+.last .cta{display:flex;gap:12px;justify-content:center;margin-top:36px}
+
+.ft{border-top:1px solid var(--line);padding:40px 0;font-size:14px;color:var(--muted)}
+.ft .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.ft img{height:22px;margin-bottom:8px}
+.ft nav{display:flex;gap:20px}
+
+/* 좁은 화면 */
+@media(max-width:1180px){.f1,.f3{left:12px}.f2,.f4{right:12px}}
+/* 모바일 메뉴 */
+.mbtn{display:none;width:42px;height:42px;border:1px solid var(--line);border-radius:12px;background:#fff;align-items:center;justify-content:center;font-size:22px;color:var(--ink);cursor:pointer;margin-left:8px;flex:none}
+.mnav{position:fixed;top:72px;left:0;right:0;bottom:0;background:#fff;z-index:49;overflow-y:auto;padding:8px 24px 40px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:.2s}
+body.mopen{overflow:hidden}
+body.mopen .mnav{opacity:1;visibility:visible;transform:none}
+.mnav .grp{font-size:13px;font-weight:700;color:var(--muted);padding:22px 0 6px}
+.mnav a{display:flex;align-items:center;gap:12px;padding:15px 0;font-size:17px;font-weight:700;color:var(--ink);border-bottom:1px solid var(--line)}
+.mnav .sub a{justify-content:space-between}
+.mnav .sub a small{font-size:13px;font-weight:500;color:var(--muted)}
+.mnav .btns{display:grid;gap:10px;margin-top:28px}
+.mnav .btns a{justify-content:center;height:52px;border-radius:14px;font-size:16px;border:0}
+.mnav .btns .p{background:var(--pri);color:#fff}
+.mnav .btns .l{border:1px solid var(--line)}
+@media(max-width:1080px){.mbtn{display:inline-flex}}
+@media(min-width:1081px){.mnav{display:none}}
+@media(max-width:1180px){.hd .slg{display:none}}
+@media(max-width:1080px){.hd nav{display:none}}
+@media(max-width:860px){
+  .kf{padding:80px 0}.kf-in{grid-template-columns:1fr;gap:40px}.kf h2{font-size:30px}.kf-logo{height:30px}.kf-facts li{flex-direction:column;gap:4px}.kf-facts span{text-align:left}.kf-gal{grid-template-rows:180px 130px 130px}
+  .mkt{grid-template-columns:1fr;gap:24px}.mcard{padding:32px 24px}.mcard h3{font-size:26px}.sols h4{font-size:19px}
+  .nums-h{font-size:26px;margin-bottom:36px}
+  .hd nav{display:none}
+  .sec{padding:80px 0}
+  .sec-head h2,.agrid h2{font-size:30px}
+  .hero{padding-top:64px}
+  .hero h1{font-size:36px}
+  .hero .lead{font-size:17px}
+  .hero .cta,.last .cta{flex-direction:column;align-items:stretch}
+  .float{display:none}
+  .worry{padding:0 0 72px}
+  .worry .ph{position:relative;width:100%;height:320px}
+  .worry .ph::after{background:linear-gradient(0deg,#06090f 0%,rgba(6,9,15,0) 55%)}
+  .worry .cap{display:none}
+  .worry .in{margin-top:-24px}
+  .worry h2{font-size:26px}
+  .pains{margin-top:40px}
+  .pain{gap:18px;padding-bottom:32px}.pain:nth-child(2){margin-left:28px}
+  .pain .n{width:44px;height:44px;font-size:15px}.pains::before{left:21px}
+  .pain h3{font-size:19px;margin-top:8px}
+  .pains,.pgrid,.agrid,.split,.pane{grid-template-columns:1fr}
+  .split.rev .txt{order:0}
+  .split h3,.pane h3{font-size:26px}
+  .pane{padding:28px;gap:28px}
+  .ftrack{height:auto}.fstick{position:static;min-height:0;padding:0}
+  .tabs{grid-template-columns:repeat(2,1fr)}
+  .nums .grid{grid-template-columns:repeat(2,1fr);row-gap:32px}
+  .num:nth-child(3){border-left:0;padding-left:0}
+  .num b{font-size:40px}
+  .event{grid-template-columns:1fr;padding:32px;gap:24px}
+  .event h3{font-size:26px}
+  .last h2{font-size:32px}
+  .g2{grid-template-columns:1fr}
+  .form{padding:24px}
+  .hd .right .login{display:none}
+  .faq details{padding:0 20px}
+  .faq summary{font-size:17px}
+}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="wrap">
+    <a class="logo" href="index.html"><img src="assets/img/logo.png" alt="MAKENOV"><span class="slg">든든한 해외영업 파트너</span></a>
+    <nav>
+      <div class="dd"><a href="service/marketer.html">서비스 소개<i class="ti ti-chevron-down"></i></a><div class="menu"><a href="service/marketer.html"><b>로컬 전담 마케터</b><small>한국어·베트남어, 현지 영업 경력</small></a><a href="service/ai-matching.html"><b>AI 파트너 매칭</b><small>매달 파트너 후보 10곳</small></a><a href="service/localization.html"><b>통역과 자료 현지화</b><small>자료부터 미팅까지 베트남어로</small></a><a href="service/followup.html"><b>회의록과 후속 연락</b><small>미팅 뒤 정리와 연락까지</small></a><a href="service/content.html"><b>자체 콘텐츠</b><small>매달 2건</small></a></div></div>
+      <a href="plans.html">플랜</a><a href="guide.html">사용가이드</a><a href="column/index.html">칼럼</a>
+    </nav>
+    <div class="right"><a class="login" href="../adcenter/login.html">비즈센터 로그인</a><a class="apply" href="#apply">상담 신청</a></div>
+    <button class="mbtn" type="button" aria-label="메뉴 열기" aria-expanded="false"><i class="ti ti-menu-2"></i></button>
+  </div>
+</header>
+<!-- mnav -->
+<div class="mnav" id="mnav">
+  <div class="grp">서비스 소개</div>
+  <div class="sub"><a href="service/marketer.html">로컬 전담 마케터<small>한국어·베트남어, 현지 영업 경력</small></a><a href="service/ai-matching.html">AI 파트너 매칭<small>매달 파트너 후보 10곳</small></a><a href="service/localization.html">통역과 자료 현지화<small>자료부터 미팅까지 베트남어로</small></a><a href="service/followup.html">회의록과 후속 연락<small>미팅 뒤 정리와 연락까지</small></a><a href="service/content.html">자체 콘텐츠<small>매달 2건</small></a></div>
+  <div class="grp">더 보기</div>
+  <a href="plans.html">플랜</a><a href="guide.html">사용가이드</a><a href="column/index.html">칼럼</a>
+  <div class="btns"><a class="p" href="index.html#apply">상담 신청</a><a class="l" href="../adcenter/login.html">비즈센터 로그인</a></div>
+</div>
+<script>
+(function(){
+  var b=document.querySelector('.mbtn'),i=b.querySelector('i');
+  function set(o){document.body.classList.toggle('mopen',o);i.className='ti '+(o?'ti-x':'ti-menu-2');b.setAttribute('aria-expanded',o)}
+  b.addEventListener('click',function(){set(!document.body.classList.contains('mopen'))});
+  [].forEach.call(document.querySelectorAll('.mnav a'),function(a){a.addEventListener('click',function(){set(false)})});
+  window.addEventListener('resize',function(){if(window.innerWidth>1080)set(false)});
+})();
+</script>
+<!-- /mnav -->
+
+<!-- 1. 히어로 -->
+<section class="hero">
+  <div class="wrap">
+    <div class="kick">든든한 해외영업 파트너, 메이크노브</div>
+    <h1>해외영업 너무 어렵죠?<br><em>메이크노브</em>랑 함께라면 든든할 거예요</h1>
+    <p class="lead"><b>전담 베트남 마케터가 1:1로</b> 붙어 드립니다.<br>매달 파트너 10곳을 골라 드리고, 통역 미팅과 후속 연락까지 챙깁니다.</p>
+    <div class="cta"><a class="btn btn-pri" href="#apply">상담 신청하기</a><a class="btn btn-line" href="../adcenter/login.html">비즈센터 로그인</a></div>
+    <div class="stage">
+      <div class="screen"><div class="bar"><i></i><i></i><i></i><span>biz.makenov.com</span></div><img src="img/shot/index.webp" alt="비즈센터 대시보드 화면"></div>
+      <div class="float f1"><div class="ic"><i class="ti ti-users-group"></i></div><div><b>파트너 후보 10곳</b><small>이번 달 제안 도착</small></div></div>
+      <div class="float f2"><div class="ic"><i class="ti ti-video"></i></div><div><b>통역 미팅 확정</b><small>목요일 오후 3시</small></div></div>
+      <div class="float f4"><div class="ic"><i class="ti ti-user-heart"></i></div><div><b>전담 마케터 1:1 케어</b><small>담당 마케터가 배정되었습니다</small></div></div>
+      <div class="float f3"><div class="ic"><i class="ti ti-notes"></i></div><div><b>회의록 도착</b><small>샘플 30개 발송 협의</small></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. 고민 -->
+<section class="worry">
+  <div class="ph"><img src="img/worry.jpg" alt="어두운 사무실에서 고민하는 사람"></div>
+  <p class="cap">혼자 붙잡고 있기엔<br>해외영업은 너무 막막합니다</p>
+  <div class="wrap">
+    <div class="in">
+      <div class="kick">해외영업이 막히는 곳</div>
+      <h2><span>제품은 자신 있는데</span><br><span>해외영업은 어디서부터 해야 할지</span></h2>
+      <div class="pains">
+        <div class="pain"><div class="n">01</div><div><h3>누구를 만나야 할지 모릅니다</h3><p>현지에 아는 사람이 없으면 제품을 소개할 상대부터 찾기 어렵습니다.</p></div></div>
+        <div class="pain"><div class="n">02</div><div><h3>말이 통하지 않습니다</h3><p>자료 번역부터 미팅 통역까지, 언어가 막히면 상담이 이어지지 않습니다.</p></div></div>
+        <div class="pain"><div class="n">03</div><div><h3>만난 뒤 관리가 끊깁니다</h3><p>미팅 내용을 정리하고 후속 연락을 챙길 사람이 없으면 기회가 흐지부지됩니다.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2-1. 전담 마케터 -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><div class="kick">메이크노브의 답</div><h2>베트남 현지에, 우리 회사<br>전담 마케터가 있다면 어떨까요?</h2><p>베트남 현지에 있는 메이크노브 마케터가 담당을 맡아 파트너를 찾고, 만나게 하고, 끝까지 챙깁니다.</p></div>
+    <div class="mkt">
+      <div class="mcard">
+        <div class="av"><i class="ti ti-user"></i></div>
+        <span class="badge"><i class="ti ti-check"></i>매칭 완료</span>
+        <h3>로컬 전담 마케터</h3>
+        <div class="chips"><span>한국어</span><span>베트남어</span><span>현지 영업 경력</span></div>
+      </div>
+      <ul class="sols">
+        <li><span class="n">01</span><div><h4><em>메이크노브 AI 파트너 매칭</em></h4><p>AI가 찾고 마케터가 확인해 매달 10곳을 제안합니다.</p></div></li>
+        <li><span class="n">02</span><div><h4>통역과 자료 현지화</h4><p>미팅 통역부터 베트남어 자료까지 맡습니다.</p></div></li>
+        <li><span class="n">03</span><div><h4>회의록과 후속 연락</h4><p>미팅 뒤 정리와 연락까지 챙깁니다.</p></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 3. 한 달 흐름 -->
+<section class="sec flow" id="flow">
+  <div class="wrap">
+    <div class="sec-head"><div class="kick">진행 방식</div><h2>한 달이면 이렇게 진행됩니다</h2><p>시작 세팅(등록, 베트남어 상세페이지, 영업자료 현지화, 시장조사)을 마친 날부터 매달 반복됩니다.</p></div>
+    <div class="ftrack"><div class="fstick">
+    <div class="tabs">
+      <button class="tab on"><small>STEP 1</small><b>후보 받기</b></button>
+      <button class="tab"><small>STEP 2</small><b>미팅 신청</b></button>
+      <button class="tab"><small>STEP 3</small><b>통역 미팅</b></button>
+      <button class="tab"><small>STEP 4</small><b>회의록</b></button>
+    </div>
+    <div class="pane on">
+      <div><h3>제품에 맞는 파트너 후보<br>10곳이 도착합니다</h3><p>AI 매칭과 현지 네트워크로 찾은 후보를 비즈센터로 보내드립니다.</p>
+        <ul><li><i class="ti ti-circle-check"></i>업종, 지역, 관심 품목까지 한눈에</li><li><i class="ti ti-circle-check"></i>파트너 정보와 연락처 무료</li><li><i class="ti ti-circle-check"></i>고르지 못하면 3곳을 더 제안</li></ul></div>
+      <div class="shot"><img src="img/shot/buyers.webp" alt="파트너 후보 화면"></div>
+    </div>
+    <div class="pane">
+      <div><h3>만날 파트너를 고르면<br>일정은 저희가 잡습니다</h3><p>미팅 1회에 250토큰을 씁니다. 전담 마케터가 파트너와 시간을 맞춥니다.</p>
+        <ul><li><i class="ti ti-circle-check"></i>파트너가 취소하면 토큰은 그대로</li><li><i class="ti ti-circle-check"></i>남은 토큰은 다음 달로 넘어감</li></ul></div>
+      <div class="shot"><img src="img/shot/buyer.webp" alt="파트너 상세 화면"></div>
+    </div>
+    <div class="pane">
+      <div><h3>통역이 함께하는<br>온라인 미팅</h3><p>사전 준비부터 통역까지 마케터가 챙깁니다. 일정은 비즈센터 캘린더에서 확인합니다.</p>
+        <ul><li><i class="ti ti-circle-check"></i>한국어·베트남어 통역</li><li><i class="ti ti-circle-check"></i>미팅 시간에 맞춰 바로 입장</li></ul></div>
+      <div class="shot"><img src="img/shot/meetings.webp" alt="미팅 캘린더 화면"></div>
+    </div>
+    <div class="pane">
+      <div><h3>미팅이 끝나면<br>회의록이 올라옵니다</h3><p>무슨 얘기를 했고 다음에 뭘 해야 하는지 정리해 드립니다. 후속 연락도 마케터가 이어갑니다.</p>
+        <ul><li><i class="ti ti-circle-check"></i>협의 내용과 다음 할 일 정리</li><li><i class="ti ti-circle-check"></i>사후 지원까지 포함</li></ul></div>
+      <div class="shot"><img src="img/shot/buyer.webp" alt="회의록 화면"></div>
+    </div>
+    </div></div>
+  </div>
+</section>
+
+<!-- 4. 비즈센터 -->
+<section class="sec" id="bizcenter">
+  <div class="wrap">
+    <div class="split">
+      <div class="txt"><div class="kick">비즈센터</div><h3>누구를 만났고<br>다음엔 뭘 할지 다 있습니다</h3><p>파트너 후보, 미팅 일정, 회의록, 남은 토큰을 한곳에서 봅니다. 메일과 메신저를 뒤질 필요가 없습니다.</p></div>
+      <div class="shot"><img src="img/shot/index.webp" alt="비즈센터 대시보드"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. 숫자 -->
+<section class="nums">
+  <div class="wrap"><h2 class="nums-h">든든한 해외영업 파트너가<br>매달 해 드리는 일</h2></div>
+  <div class="wrap grid">
+    <div class="num"><b>1:1</b><span>전담 베트남 마케터</span><small>처음부터 끝까지 같은 담당자</small></div>
+    <div class="num"><b>10곳</b><span>매달 파트너 후보</span><small>고르지 못하면 3곳 더</small></div>
+    <div class="num"><b>통역</b><span>통역 포함 온라인 미팅</span><small>회의록과 사전·사후 지원 포함</small></div>
+    <div class="num"><b>무료</b><span>파트너 정보와 연락처</span><small>보는 데는 토큰을 쓰지 않습니다</small></div>
+  </div>
+</section>
+
+<!-- 6. 등록 제품 -->
+<section class="sec">
+  <div class="wrap"><div class="sec-head"><div class="kick">메이크노브 등록 제품</div><h2>이런 한국 제품들이<br>베트남 파트너를 만나고 있습니다</h2></div></div>
+  <div class="roll">
+    <div class="track" id="t1"></div>
+    <div class="track rev" id="t2"></div>
+  </div>
+</section>
+
+<!-- 7. 플랜 -->
+<section class="sec plans" id="plans">
+  <div class="wrap">
+    <div class="sec-head"><div class="kick">플랜</div><h2>내용은 같고,<br>길게 할수록 월 금액이 내려갑니다</h2></div>
+    <div class="pgrid">
+      <div class="plan"><h3>3개월</h3><div class="mo">월<b>233</b>만 원</div><div class="tot">총 700만 원</div>
+        <ul><li class="hl"><i class="ti ti-coins"></i>매달 250토큰</li><li><i class="ti ti-check"></i>파트너 후보 매달 10곳</li><li><i class="ti ti-check"></i>온라인 미팅 1회 250토큰</li><li><i class="ti ti-check"></i>자체 콘텐츠 매달 2건</li><li><i class="ti ti-check"></i>파트너 정보·연락처 무료</li></ul>
+        <a class="btn btn-ghost" href="#apply">상담 신청</a></div>
+      <div class="plan"><h3>6개월</h3><div class="mo">월<b>200</b>만 원</div><div class="tot">총 1,200만 원</div>
+        <ul><li class="hl"><i class="ti ti-coins"></i>매달 300토큰</li><li><i class="ti ti-check"></i>파트너 후보 매달 10곳</li><li><i class="ti ti-check"></i>온라인 미팅 1회 250토큰</li><li><i class="ti ti-check"></i>자체 콘텐츠 매달 2건</li><li><i class="ti ti-check"></i>파트너 정보·연락처 무료</li></ul>
+        <a class="btn btn-ghost" href="#apply">상담 신청</a></div>
+      <div class="plan best"><span class="tag">KFESTA 초청</span><h3>1년</h3><div class="mo">월<b>167</b>만 원</div><div class="tot">총 2,000만 원</div>
+        <ul><li class="hl"><i class="ti ti-coins"></i>매달 350토큰</li><li><i class="ti ti-check"></i>파트너 후보 매달 10곳</li><li><i class="ti ti-check"></i>온라인 미팅 1회 250토큰</li><li><i class="ti ti-check"></i>자체 콘텐츠 매달 2건</li><li><i class="ti ti-check"></i>파트너 정보·연락처 무료</li><li class="hl"><i class="ti ti-plane"></i>KFESTA 수출상담회 초청</li></ul>
+        <a class="btn btn-pri" href="#apply">상담 신청</a></div>
+    </div>
+    <p class="pnote">가격은 부가세 별도입니다.</p>
+  </div>
+</section>
+
+<!-- 8. KFESTA -->
+<section class="kf">
+  <div class="wrap kf-in">
+    <div class="kf-txt">
+      <img class="kf-logo" src="img/kfesta/logo.webp" alt="KFESTA">
+      <div class="kick">1년 플랜 특전</div>
+      <h2><span>메이크노브가 베트남에서 여는</span><br><span>자체 브랜드 행사</span></h2>
+      <p>메이크노브는 베트남 현지에서 KFESTA를 매년 여러 차례 직접 주최합니다. 현지 파트너가 많이 찾는 자리라, 온라인으로 만난 파트너를 직접 만나고 새 파트너도 만날 수 있습니다.</p>
+      <ul class="kf-facts">
+        <li><b>매년 여러 차례</b><span>베트남 현지에서 직접 주최</span></li>
+        <li><b>1년 플랜 고객 초대</b><span>참가비 무료, 항공권과 호텔은 기업 부담</span></li>
+      </ul>
+      <a class="btn btn-pri" href="#apply">1년 플랜 상담</a>
+    </div>
+    <div class="kf-gal">
+      <img class="g1" src="img/kfesta/seminar.webp" alt="KFESTA 설명회 현장" loading="lazy">
+      <img class="g2" src="img/kfesta/booths.webp" alt="KFESTA 상담 부스" loading="lazy">
+      <img class="g3" src="img/kfesta/venue.webp" alt="KFESTA 행사장 입구" loading="lazy">
+      <img class="g4" src="img/kfesta/brands.webp" alt="KFESTA 한국 브랜드 전시" loading="lazy">
+      <img class="g5" src="img/kfesta/meeting.webp" alt="KFESTA 현장 상담" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- 9. FAQ -->
+<section class="sec" id="faq" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-head"><div class="kick">자주 묻는 질문</div><h2>상담 전에 확인하세요</h2></div>
+    <div class="faq">
+      <details open><summary>지금 어느 나라를 지원하나요?<i class="ti ti-chevron-down"></i></summary><div class="a">지금은 베트남 서비스를 운영합니다. 다른 나라도 열리는 대로 안내드립니다.</div></details>
+      <details><summary>토큰은 어디에 쓰나요?<i class="ti ti-chevron-down"></i></summary><div class="a">온라인 미팅에만 씁니다. 미팅 1회에 250토큰이고, 플랜에 따라 매달 250, 300, 350토큰을 드립니다. 부족하면 추가로 충전할 수 있습니다.</div></details>
+      <details><summary>파트너 정보와 연락처도 돈이 드나요?<i class="ti ti-chevron-down"></i></summary><div class="a">아니요, 무료입니다. 파트너가 공개에 동의한 연락처만 보여 드립니다.</div></details>
+      <details><summary>후보 중에 마음에 드는 곳이 없으면요?<i class="ti ti-chevron-down"></i></summary><div class="a">10곳 중 고르지 못하면 3곳을 더 제안합니다. 그래도 고르지 못한 달은 토큰을 차감하지 않고 다음 달로 넘깁니다.</div></details>
+      <details><summary>파트너가 미팅에 안 나오면요?<i class="ti ti-chevron-down"></i></summary><div class="a">토큰을 차감하지 않고 다른 파트너로 다시 잡아 드립니다.</div></details>
+      <details><summary>계약 기간은 언제부터인가요?<i class="ti ti-chevron-down"></i></summary><div class="a">등록, 상세페이지, 현지화 세팅이 끝난 날부터 시작합니다. 가격은 부가세 별도입니다.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- 10. 상담 신청 -->
+<section class="sec apply" id="apply">
+  <div class="wrap agrid">
+    <div class="side"><div class="kick">상담 신청</div><h2>우리 제품,<br>베트남에서 통할까요?</h2><p>회사와 제품을 알려주시면 전담 마케터가 맞는 플랜과 진행 방법을 안내합니다.</p><p class="mail">문의 메일 <b>notice@makenov.com</b></p></div>
+    <div class="form">
+      <div class="g2"><div class="fld"><label>회사명<i>*</i></label><input placeholder="예: (주)메이크노브"></div><div class="fld"><label>담당자명<i>*</i></label><input placeholder="예: 홍길동"></div></div>
+      <div class="g2"><div class="fld"><label>연락처<i>*</i></label><input placeholder="예: 010-0000-0000"></div><div class="fld"><label>이메일<i>*</i></label><input type="email" placeholder="예: name@company.com"></div></div>
+      <div class="g2"><div class="fld"><label>관심 플랜</label><select><option value="">선택해 주세요</option><option>3개월</option><option>6개월</option><option>1년</option><option>아직 모르겠어요</option></select></div><div class="fld"><label>제품 카테고리<i>*</i></label><select><option value="">선택해 주세요</option><option>뷰티·화장품</option><option>식품·음료</option><option>리빙·생활용품</option><option>헬스·건강</option><option>키즈·육아</option><option>테크·가전</option><option>산업재·장비</option><option>기타</option></select></div></div>
+      <div class="fld"><label>제품 소개<i>*</i></label><textarea placeholder="제품의 주요 특징과 지금 판매 채널을 간단히 적어 주세요."></textarea></div>
+      <label class="agree"><input type="checkbox"><span>상담을 위한 개인정보 수집·이용에 동의합니다.</span></label>
+      <button class="btn btn-pri" type="button" onclick="alert('시안 화면입니다. 실제로 접수되지 않습니다.')">상담 신청하기</button>
+    </div>
+  </div>
+</section>
+
+<!-- 11. 마지막 -->
+<section class="last">
+  <div class="wrap">
+    <p class="pre">막막했던 해외영업도 스마트하게</p>
+    <h2>든든한 해외영업 파트너,<br><em>메이크노브</em></h2>
+    <div class="cta"><a class="btn btn-pri" href="#apply">상담 신청하기</a><a class="btn btn-line" href="../adcenter/login.html">비즈센터 로그인</a></div>
+  </div>
+</section>
+
+<footer class="ft">
+  <div class="wrap">
+    <div><img src="assets/img/logo.png" alt="MAKENOV"><div>든든한 해외영업 파트너, 메이크노브 · notice@makenov.com</div><div style="margin-top:4px">© 2026 MAKENOV. All rights reserved.</div></div>
+    <nav><a href="guide.html">사용가이드</a><a href="column/index.html">칼럼</a><a href="../adcenter/login.html">비즈센터 로그인</a><a href="https://kr.makenov.com/" target="_blank" rel="noopener">메이크노브</a></nav>
+  </div>
+</footer>
+
+<script>
+// 3. 탭: 6초마다 넘어가고, 누르면 멈춤
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tab')),panes=[].slice.call(document.querySelectorAll('.pane')),i=0,stop=false;
+  function show(k){i=k;tabs.forEach(function(t,n){t.classList.toggle('on',n===k)});panes.forEach(function(p,n){p.classList.toggle('on',n===k)})}
+  var track=document.querySelector('.ftrack'),stick=document.querySelector('.fstick'),mq=window.matchMedia('(min-width:861px)');
+  function range(){return track.offsetHeight-stick.offsetHeight}
+  tabs.forEach(function(t,n){t.addEventListener('click',function(){
+    if(!mq.matches){show(n);return}
+    var top=track.getBoundingClientRect().top+window.pageYOffset-72;
+    window.scrollTo({top:top+range()*(n+0.15)/tabs.length,behavior:'smooth'});
+  })});
+  function onScroll(){
+    if(!mq.matches)return;
+    var p=(72-track.getBoundingClientRect().top)/range();
+    var k=Math.max(0,Math.min(tabs.length-1,Math.floor(p*tabs.length)));
+    if(k!==i)show(k);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+// 6. 등록 제품 롤링 (실제 메이크노브 등록 제품)
+(function(){
+  var P=[['FIRESSAK','오토바이용 질식소화덮개'],['SEKWANG HI-TECH','유압 곡관 엘보 S-fitting'],['HOONSUNG','쉬메릭 선글라스와 티타늄 프레임'],['DAEWON INDUSTRIAL','폰텔로 크리스피 유리 에어프라이어'],['NIGHTSWIMMING','나이트스위밍 네일 향수'],['IVT','웨이퍼·철강용 TDS 장비'],['SUNMION','마리엔 손수건'],['ART&HUG','자개 갓 키링'],['BLANC CORPORATION','HELLO SLEEP 침구'],['A.SYS TECHNOLOGY','건식 전극 적층기 DCM'],['DONGJIN BEDDING','동진베딩 프리미엄 침구'],['TOP TOOLING SYSTEMS','C-Jet 공구 클램핑 시스템'],['AUTOLABS','AI 원단 결함 검사 시스템'],['EDOVISION','ENDOVISION 스킨케어'],['NEGENTEC','HIPER HEALD 플라스틱 종광'],['HELIBEAN','HELIBEAN COFFEE 프랜차이즈']];
+  function card(n){var p=P[n];return '<div class="pcard"><img src="img/prod/'+(n+1)+'.jpg" alt="'+p[1]+'" loading="lazy"><div><b>'+p[0]+'</b><span>'+p[1]+'</span></div></div>'}
+  var a='',b='';for(var k=0;k<8;k++){a+=card(k);b+=card(k+8)}
+  document.getElementById('t1').innerHTML=a+a;document.getElementById('t2').innerHTML=b+b;
+})();
+</script>
+</body>
+</html>

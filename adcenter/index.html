@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>대시보드 - MAKENOV 비즈센터</title>
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css">
+    <link href="assets/css/ad-style.css" rel="stylesheet">
+    <style>
+.ad-dashboard { color: #2b2b2b; }
+.adc-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+.adc-heading h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.2px;
+}
+.media-tabs {
+    display: inline-flex;
+    gap: 6px;
+    background: #f2f3f8;
+    border-radius: 999px;
+    padding: 4px;
+}
+.media-tab-btn {
+    border: 0;
+    background: transparent;
+    border-radius: 999px;
+    color: #70738a;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 7px 12px;
+    cursor: pointer;
+}
+.media-tab-btn.active {
+    background: #ffffff;
+    box-shadow: 0 1px 8px rgba(43, 47, 81, 0.12);
+    color: #1faf8a;
+}
+
+.ad-overview {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+.ring-group {
+    background: #fff;
+    border: 1px solid #eceef4;
+    border-radius: 12px;
+    padding: 14px;
+}
+.ring-title {
+    font-size: 13px;
+    color: #777b92;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+.rings {
+    display: flex;
+    gap: 14px;
+}
+.ring-item {
+    flex: 1;
+    text-align: center;
+}
+.ring {
+    width: 114px;
+    height: 114px;
+    border-radius: 50%;
+    margin: 0 auto 8px;
+    background: conic-gradient(#27caa1 var(--deg, 0deg), #e3f7f1 var(--deg, 0deg));
+    position: relative;
+}
+.ring::after {
+    content: "";
+    width: 82px;
+    height: 82px;
+    border-radius: 50%;
+    background: #fff;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+}
+.ring-num {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 2;
+    font-weight: 800;
+    color: #22263a;
+    font-size: 24px;
+}
+.ring-label {
+    font-size: 12px;
+    color: #7f8296;
+    font-weight: 700;
+}
+
+.quick-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+}
+.quick-card {
+    background: #fff;
+    border: 1px solid #eceef4;
+    border-radius: 10px;
+    padding: 25px 30px 25px 15px;
+    min-height: 98px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.quick-label {
+    color: #8d91a9;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 22px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.quick-label .ti {
+    font-size: 30px;
+    color: #022e7d;
+}
+.quick-value {
+    text-align: right;
+    font-size: 34px;
+    line-height: 1;
+    font-weight: 800;
+    color: #1f2240;
+}
+
+.section-card {
+    background: #fff;
+    border: 1px solid #eceef4;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+}
+.section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+.section-head h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 800;
+    color: #3a3e57;
+}
+.date-badge {
+    font-size: 12px;
+    color: #878ca6;
+    background: #f5f6fc;
+    border-radius: 6px;
+    padding: 4px 8px;
+}
+.chart-wrap {
+    height: 220px;
+    border: 1px solid #f0f1f6;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    background:
+        repeating-linear-gradient(to bottom, #ffffff 0, #ffffff 33px, #f5f6fb 34px),
+        linear-gradient(to bottom, #ffffff, #ffffff);
+}
+#trend-chart {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.chart-legend {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+}
+.legend-item {
+    font-size: 12px;
+    color: #7e829b;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    display: inline-block;
+}
+.dot-contents { background: #27caa1; }
+.dot-applicants { background: #022e7d; }
+
+.simple-list {
+    width: 100%;
+    border-collapse: collapse;
+}
+.simple-list th,
+.simple-list td {
+    padding: 10px;
+    font-size: 13px;
+    border-bottom: 1px solid #f1f2f8;
+    text-align: left;
+}
+.simple-list th {
+    color: #8c90a7;
+    font-weight: 700;
+}
+.simple-list td {
+    color: #31364f;
+}
+.simple-list tr:last-child td { border-bottom: 0; }
+.empty-block {
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b5b8c8;
+    font-size: 13px;
+}
+
+@media (max-width: 1180px) {
+    .ad-overview {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 900px) {
+    .quick-metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+@media (max-width: 640px) {
+    .adc-heading {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    /* 미디어 탭: 6개가 한 줄에 안 들어가므로 가로 스크롤 */
+    .media-tabs {
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .media-tab-btn { white-space: nowrap; font-size: 14px; padding: 7px 10px; }
+
+    /* 링 2개는 나란히 두는 편이 세로 공간을 아낀다 */
+    .rings { justify-content: center; }
+    .ring { width: 100px; height: 100px; }
+    .ring::after { width: 72px; height: 72px; top: 14px; left: 14px; }
+    .ring-num { font-size: 21px; }
+
+    .quick-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .quick-card { padding: 14px; min-height: 84px; }
+    .quick-label { margin-bottom: 12px; }
+    .quick-label .ti { font-size: 22px; }
+    .quick-value { font-size: 25px; }
+
+    .chart-wrap { height: 170px; }
+
+    /* JS 렌더 테이블: 좁은 화면에서는 가로 스크롤 */
+    #top-campaigns-wrap, #report-wrap, #contents-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    #top-campaigns-wrap .simple-list,
+    #report-wrap .simple-list,
+    #contents-wrap .simple-list { min-width: 480px; }
+}
+</style>
+    <style>
+    .logo-mark { background:#022e7d; }
+    .mk-note { font-size:12px; color:#8d91a9; }
+    .quick-label { white-space:nowrap; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+    <div class="logo-bar">
+        <span class="logo-mark">M</span>
+        <div>
+            <div class="logo-title">MAKENOV</div>
+            <div class="logo-sub">비즈센터</div>
+        </div>
+    </div>
+    <nav class="sidebar-nav">
+        <div class="nav-item active">
+            <a href="index.html"><i class="ti ti-layout-dashboard"></i> 대시보드</a>
+        </div>
+        <div class="nav-item">
+            <a href="buyers.html"><i class="ti ti-users-group"></i> 파트너 후보</a>
+        </div>
+        <div class="nav-item">
+            <a href="meetings.html"><i class="ti ti-calendar-event"></i> 미팅 캘린더</a>
+        </div>
+        <div class="nav-item">
+            <a href="tokens.html"><i class="ti ti-coins"></i> 토큰·플랜</a>
+        </div>
+    </nav>
+    <a class="sidebar-guide" href="guide.html">
+        <i class="ti ti-help-circle"></i> 비즈센터 이용안내
+    </a>
+</div>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <div class="main">
+        <div class="topbar">
+    <div class="topbar-left">
+        <button type="button" class="sidebar-toggle" aria-label="비즈센터">
+            <i class="ti ti-menu-2"></i>
+        </button>
+        <div class="topbar-logo">내 파트너 미팅 운영</div>
+    </div>
+    <div class="topbar-right">
+        <div class="topbar-lang">
+            <i class="ti ti-language"></i>
+            <select class="lang-select" aria-label="언어">
+                <option value="ko" selected>한국어</option>
+                <option value="vi">Tiếng Việt</option>
+                <option value="en">English</option>
+            </select>
+        </div>
+        <div class="topbar-user"><i class="ti ti-user"></i> <span>demo@makenov.com</span></div>
+        <a href="login.html" class="logout-btn">로그아웃</a>
+    </div>
+</div>
+        <div class="content">
+<div class="ad-dashboard" data-default-tab="all">
+    <div class="adc-heading">
+        <h2>내 파트너 미팅 현황</h2>
+        <div class="media-tabs" id="media-tabs">
+            <button type="button" class="media-tab-btn" data-tab="all">전체</button>
+            <button type="button" class="media-tab-btn" data-tab="month">이번 달</button>
+        </div>
+    </div>
+
+    <div class="ad-overview">
+        <div class="ring-group">
+            <div class="ring-title">6개월 플랜 · 2026.09.01 ~ 2027.02.28</div>
+            <div class="rings">
+                <div class="ring-item">
+                    <div class="ring" id="ring-total"><div class="ring-num" id="ring-total-num">0</div></div>
+                    <div class="ring-label">이번 달 파트너 후보</div>
+                </div>
+                <div class="ring-item">
+                    <div class="ring ring-active" id="ring-active"><div class="ring-num" id="ring-active-num">0</div></div>
+                    <div class="ring-label">이번 달 토큰 사용</div>
+                </div>
+            </div>
+        </div>
+        <div class="quick-metrics">
+            <div class="quick-card">
+                <div class="quick-label"><i class="ti ti-coins"></i> 남은 토큰</div>
+                <div class="quick-value" id="quick-contents">0</div>
+            </div>
+            <div class="quick-card">
+                <div class="quick-label"><i class="ti ti-eye"></i> 파트너 열람</div>
+                <div class="quick-value" id="quick-likes">0</div>
+            </div>
+            <div class="quick-card">
+                <div class="quick-label"><i class="ti ti-address-book"></i> 연락처 확인</div>
+                <div class="quick-value" id="quick-comments">0</div>
+            </div>
+            <div class="quick-card">
+                <div class="quick-label"><i class="ti ti-video"></i> 진행 미팅</div>
+                <div class="quick-value" id="quick-applicants">0</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-head">
+            <h3>기간 별 활동</h3>
+            <span class="date-badge" id="chart-range">-</span>
+        </div>
+        <div class="chart-legend">
+            <span class="legend-item"><i class="dot dot-contents"></i> 파트너 열람</span>
+            <span class="legend-item"><i class="dot dot-applicants"></i> 미팅 신청</span>
+        </div>
+        <div class="chart-wrap"><svg id="trend-chart" viewBox="0 0 1000 260" preserveAspectRatio="none"></svg></div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-head"><h3>이번 달 파트너 후보</h3></div>
+        <table class="simple-list"><thead><tr><th>파트너</th><th>지역</th><th>업종</th><th>상태</th></tr></thead>
+        <tbody><tr><td><a href="buyer.html" style="color:#333;text-decoration:none;font-weight:700;">호치민 화장품 유통사 A</a></td><td>호치민</td><td>드럭스토어</td><td>미팅 확정</td></tr><tr><td><a href="buyer.html" style="color:#333;text-decoration:none;font-weight:700;">하노이 마트 체인 B</a></td><td>하노이</td><td>마트</td><td>열람함</td></tr><tr><td><a href="buyer.html" style="color:#333;text-decoration:none;font-weight:700;">다낭 온라인 셀러 C</a></td><td>다낭</td><td>온라인몰</td><td>열람함</td></tr><tr><td><a href="buyer.html" style="color:#333;text-decoration:none;font-weight:700;">호치민 수입 총판 D</a></td><td>호치민</td><td>총판</td><td>새 후보</td></tr><tr><td><a href="buyer.html" style="color:#333;text-decoration:none;font-weight:700;">껀터 약국 체인 E</a></td><td>껀터</td><td>약국</td><td>새 후보</td></tr></tbody></table>
+    </div>
+
+    <div class="section-card">
+        <div class="section-head"><h3>미팅 일정</h3></div>
+        <table class="simple-list"><thead><tr><th>파트너</th><th>미팅 일시</th><th>상태</th></tr></thead>
+        <tbody><tr><td>호치민 화장품 유통사 A</td><td>2026-10-14 15:00</td><td>완료</td></tr><tr><td>다낭 온라인 셀러 C</td><td>2026-10-29 10:00</td><td>확정 대기</td></tr><tr><td>하노이 백화점 F</td><td>2026-11-12 14:00</td><td>확정</td></tr></tbody></table>
+    </div>
+
+    <div class="section-card">
+        <div class="section-head"><h3>최근 회의록</h3></div>
+        <table class="simple-list"><thead><tr><th>파트너</th><th>회의록</th><th>등록일</th></tr></thead>
+        <tbody><tr><td>호치민 화장품 유통사 A</td><td><a href="buyer.html#notes" style="color:#1faf8a;text-decoration:none;">샘플 발송 조건과 첫 주문 수량 협의</a></td><td>2026-10-15</td></tr><tr><td>호치민 화장품 유통사 A</td><td><a href="buyer.html#notes" style="color:#1faf8a;text-decoration:none;">독점 유통 가능 범위 확인</a></td><td>2026-09-18</td></tr><tr><td>하노이 마트 체인 B</td><td><a href="buyer.html#notes" style="color:#1faf8a;text-decoration:none;">입점 절차와 마진 구조 안내</a></td><td>2026-09-09</td></tr></tbody></table>
+    </div>
+
+    <div style="text-align:right;margin-top:4px;">
+        <a href="buyers.html" style="font-size:12px;color:#1faf8a;text-decoration:none;font-weight:700;">파트너 후보 전체 보기</a>
+    </div>
+</div>
+        </div>
+        <footer class="app-footer">
+    MAKENOV 비즈센터 / 이메일 : notice@makenov.com<br>
+    이 화면은 시안이며 표시된 파트너와 수치는 샘플 데이터입니다.
+</footer>
+    </div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/sweetalert2.all.min.js"></script>
+    <script>
+  const Toast = Swal.mixin({
+    toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, timerProgressBar: true,
+    onOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  });
+  function mkDemo(msg) { Toast.fire({ icon: 'info', title: msg || '시안 화면입니다. 실제 처리는 되지 않습니다.' }); }
+    (function () {
+        document.addEventListener('click', function (e) {
+            var t = e.target;
+            if (t.closest && t.closest('.sidebar-toggle')) { document.body.classList.toggle('sidebar-open'); return; }
+            if ((t.closest && t.closest('#sidebar-overlay'))
+                || (t.closest && t.closest('.sidebar-nav a[href]:not([href="#"])'))
+                || (t.closest && t.closest('.sidebar-guide'))) {
+                document.body.classList.remove('sidebar-open');
+            }
+        });
+    })();
+    </script>
+<script>
+const dashboardData = {"all": {"stats": {"candidates": 10, "meetingsUsed": 1, "tokensUsed": 250, "monthTokens": 300, "tokens": 350, "viewed": 24, "contacts": 6, "meetings": 4}, "chart": {"labels": ["2026-09-27", "2026-09-28", "2026-09-29", "2026-09-30", "2026-10-01", "2026-10-02", "2026-10-03", "2026-10-04", "2026-10-05", "2026-10-06", "2026-10-07", "2026-10-08", "2026-10-09", "2026-10-10", "2026-10-11", "2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-16", "2026-10-17", "2026-10-18", "2026-10-19", "2026-10-20", "2026-10-21", "2026-10-22", "2026-10-23", "2026-10-24", "2026-10-25", "2026-10-26"], "a": [1, 1, 0, 0, 0, 2, 0, 1, 0, 2, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 1], "b": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0]}}, "month": {"stats": {"candidates": 10, "meetingsUsed": 1, "tokensUsed": 250, "monthTokens": 300, "tokens": 350, "viewed": 9, "contacts": 2, "meetings": 2}, "chart": {"labels": ["2026-10-01", "2026-10-02", "2026-10-03", "2026-10-04", "2026-10-05", "2026-10-06", "2026-10-07", "2026-10-08", "2026-10-09", "2026-10-10", "2026-10-11", "2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-16", "2026-10-17", "2026-10-18", "2026-10-19", "2026-10-20", "2026-10-21", "2026-10-22", "2026-10-23", "2026-10-24", "2026-10-25", "2026-10-26"], "a": [0, 2, 0, 1, 0, 2, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 1], "b": [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0]}}};
+function nf(v) { return Number(v || 0).toLocaleString(); }
+function ringDeg(v, t) { if (!t || t <= 0) return 0; return Math.max(0, Math.min(360, Math.round((v / t) * 360))); }
+function drawTrendChart(labels, a, b) {
+    const svg = document.getElementById('trend-chart'); if (!svg) return;
+    const width = 1000, height = 260, padX = 28, padY = 22, chartW = width - padX * 2, chartH = height - padY * 2;
+    const maxValue = Math.max(1, ...a, ...b);
+    const step = labels.length > 1 ? chartW / (labels.length - 1) : chartW;
+    const toPath = (arr) => arr.map((v, i) => (i === 0 ? 'M' : 'L') + (padX + step * i).toFixed(2) + ' ' + (padY + chartH - (v / maxValue) * chartH).toFixed(2)).join(' ');
+    const circles = (arr, c) => arr.map((v, i) => '<circle cx="' + (padX + step * i).toFixed(2) + '" cy="' + (padY + chartH - (v / maxValue) * chartH).toFixed(2) + '" r="2.8" fill="' + c + '" />').join('');
+    let grid = '';
+    for (let i = 0; i < 6; i++) { const y = padY + (chartH / 5) * i; grid += '<line x1="' + padX + '" y1="' + y.toFixed(2) + '" x2="' + (width - padX) + '" y2="' + y.toFixed(2) + '" stroke="#eef0f7" stroke-width="1" />'; }
+    svg.innerHTML = '<g>' + grid + '</g>' +
+        '<path d="' + toPath(b) + '" fill="none" stroke="#022e7d" stroke-width="2.2" />' +
+        '<path d="' + toPath(a) + '" fill="none" stroke="#27caa1" stroke-width="2.2" />' +
+        circles(b, '#022e7d') + circles(a, '#27caa1');
+}
+function activateTab(tab) {
+    const data = dashboardData[tab] || dashboardData.all, s = data.stats;
+    document.querySelectorAll('.media-tab-btn').forEach((btn) => btn.classList.toggle('active', btn.dataset.tab === tab));
+    document.getElementById('ring-total-num').textContent = nf(s.candidates);
+    document.getElementById('ring-active-num').textContent = nf(s.tokensUsed);
+    document.getElementById('quick-contents').textContent = nf(s.tokens);
+    document.getElementById('quick-likes').textContent = nf(s.viewed);
+    document.getElementById('quick-comments').textContent = nf(s.contacts);
+    document.getElementById('quick-applicants').textContent = nf(s.meetings);
+    document.getElementById('ring-total').style.setProperty('--deg', '360deg');
+    document.getElementById('ring-active').style.setProperty('--deg', ringDeg(s.tokensUsed, s.monthTokens) + 'deg');
+    const L = data.chart.labels;
+    document.getElementById('chart-range').textContent = L[0] + ' ~ ' + L[L.length - 1];
+    drawTrendChart(L, data.chart.a, data.chart.b);
+}
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.media-tab-btn').forEach((btn) => btn.addEventListener('click', function () { activateTab(this.dataset.tab); }));
+    activateTab('all');
+});
+</script>
+</body>
+</html>
