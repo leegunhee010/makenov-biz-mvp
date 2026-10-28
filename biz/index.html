@@ -579,7 +579,7 @@ body.mopen .mnav{opacity:1;visibility:visible;transform:none}
       <div class="g2"><div class="fld"><label>관심 플랜</label><select><option value="">선택해 주세요</option><option>3개월</option><option>6개월</option><option>1년</option><option>아직 모르겠어요</option></select></div><div class="fld"><label>제품 카테고리<i>*</i></label><select><option value="">선택해 주세요</option><option>뷰티·화장품</option><option>식품·음료</option><option>리빙·생활용품</option><option>헬스·건강</option><option>키즈·육아</option><option>테크·가전</option><option>산업재·장비</option><option>기타</option></select></div></div>
       <div class="fld"><label>제품 소개<i>*</i></label><textarea placeholder="제품의 주요 특징과 지금 판매 채널을 간단히 적어 주세요."></textarea></div>
       <label class="agree"><input type="checkbox"><span>상담을 위한 개인정보 수집·이용에 동의합니다.</span></label>
-      <button class="btn btn-pri" type="button" onclick="alert('시안 화면입니다. 실제로 접수되지 않습니다.')">상담 신청하기</button>
+      <button class="btn btn-pri" type="button" id="apply-btn">상담 신청하기</button>
     </div>
   </div>
 </section>
@@ -626,6 +626,28 @@ body.mopen .mnav{opacity:1;visibility:visible;transform:none}
   function card(n){var p=P[n];return '<div class="pcard"><img src="img/prod/'+(n+1)+'.jpg" alt="'+p[1]+'" loading="lazy"><div><b>'+p[0]+'</b><span>'+p[1]+'</span></div></div>'}
   var a='',b='';for(var k=0;k<8;k++){a+=card(k);b+=card(k+8)}
   document.getElementById('t1').innerHTML=a+a;document.getElementById('t2').innerHTML=b+b;
+})();
+</script>
+<script src="../adcenter/assets/js/mkdata.js"></script>
+<script>
+// 시연용 연결: 자주 묻는 질문은 관리자 설정을 따르고, 상담 신청은 관리자 "사이트 관리"로 들어갑니다.
+(function () {
+  if (!window.MK) return;
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  var faq = document.querySelector('#faq .faq');
+  if (faq) faq.innerHTML = MK.db.faq.filter(function (f) { return f.visible; }).map(function (f, i) {
+    return '<details' + (i === 0 ? ' open' : '') + '><summary>' + esc(f.q) + '<i class="ti ti-chevron-down"></i></summary><div class="a">' + esc(f.a) + '</div></details>';
+  }).join('');
+  var btn = document.getElementById('apply-btn');
+  if (btn) btn.addEventListener('click', function () {
+    var f = btn.closest('.form'), ins = f.querySelectorAll('input:not([type=checkbox])'), sel = f.querySelectorAll('select'), ta = f.querySelector('textarea'), agree = f.querySelector('input[type=checkbox]');
+    var v = { company: ins[0].value.trim(), name: ins[1].value.trim(), phone: ins[2].value.trim(), email: ins[3].value.trim(), plan: sel[0].value, category: sel[1].value, text: ta.value.trim() };
+    if (!v.company || !v.name || !v.phone || !v.email || !v.category || !v.text) { alert('별표(*) 항목을 모두 적어 주세요.'); return; }
+    if (!agree.checked) { alert('개인정보 수집·이용에 동의해 주세요.'); return; }
+    v.id = MK.nextId('q'); v.date = MK.today(); v.status = '새 문의';
+    MK.db.inquiries.unshift(v); MK.save();
+    f.innerHTML = '<div style="text-align:center;padding:48px 12px"><div style="width:64px;height:64px;margin:0 auto;border-radius:50%;background:var(--pri-soft);color:var(--pri-d);display:flex;align-items:center;justify-content:center;font-size:32px"><i class="ti ti-check"></i></div><h3 style="font-size:24px;font-weight:800;margin-top:20px">상담 신청이 접수되었습니다</h3><p style="font-size:16px;line-height:1.7;color:var(--body);margin-top:10px">전담 마케터가 확인 후 연락드립니다.</p></div>';
+  });
 })();
 </script>
 </body>

@@ -140,6 +140,15 @@
   [].forEach.call(document.querySelectorAll('.topic'),function(t){t.addEventListener('click',function(){pick(t.getAttribute('data-cat'));document.querySelector('.clh').scrollIntoView({behavior:'smooth'})})});
 })();
 </script>
+<script src="../../adcenter/assets/js/mkdata.js"></script>
+<script>
+(function(){
+  if(!window.MK)return;
+  var hidden=MK.db.blog.filter(function(b){return !b.visible}).map(function(b){return b.slug+'.html'});
+  [].forEach.call(document.querySelectorAll('.ccard'),function(a){if(hidden.indexOf(a.getAttribute('href'))>=0)a.remove()});
+  var n=document.querySelectorAll('.ccard').length,c=document.querySelector('.clh .count b');if(c)c.textContent=n;
+})();
+</script>
 <section class="last">
   <div class="wrap">
     <p class="pre">막막했던 해외영업도 스마트하게</p>
